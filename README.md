@@ -3,6 +3,8 @@
 
 ![Operation Silent Chaos Logo](./Assets/GameAssets/title.png)  
 
+![Spec Sheet](./Assets/GameAssets/Operation%20Silent%20Chaos%20-%20Spec%20sheet.png)  
+
 ## Table of Contents  
 1. [Overview](#overview)  
 2. [Technologies Used](#technologies-used)  
