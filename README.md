@@ -21,7 +21,8 @@
 **Genre**: Single-player, Top-down 2D Stealth Game  
 **Platform**: Windows PC  
 **Core Concept**: Infiltrate enemy bases, steal secret weapon plans, and evade detection as an elite spy in a tense Cold War setting. Use strategic thinking to outsmart enemies and complete your mission.
-**Oprional Companion App**: [Click here for Repo](https://github.com/mauricedolibois/androidapp)
+
+**Optional Companion App**: [Click here for Repo](https://github.com/mauricedolibois/androidapp)
 
 ## Technologies Used  
 - **Game Engine**: Unity (C#)  
