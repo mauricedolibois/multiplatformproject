@@ -15,15 +15,12 @@ public class RenderBackWall : MonoBehaviour
 
     void Update()
     {
-        // Compare the Y position of the player and the object
         if (player.transform.position.y > transform.position.y)
         {
-            // Render in front of the player
             spriteRenderer.sortingOrder = -1;
         }
         else
         {
-            // Render behind the player
             spriteRenderer.sortingOrder = 1;
         }
     }

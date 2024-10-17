@@ -39,10 +39,10 @@ public class CameraController : MonoBehaviour
         if (playerTransform != null)
         {
             Vector3 targetPosition = playerTransform.position + offset;
-
             if (Mathf.Abs(targetPosition.x - transform.position.x) > buffer.x ||
                 Mathf.Abs(targetPosition.y - transform.position.y) > buffer.y)
             {
+                //TODO: remove Camera stuttering
                 transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
             }
         }
@@ -68,8 +68,13 @@ public class CameraController : MonoBehaviour
 
     private System.Collections.IEnumerator ZoomTo(float targetSize)
     {
-        while (Mathf.Abs(cameraComponent.orthographicSize - targetSize) > 0.01f)
+        Vector3 targetPosition = playerTransform.position + offset;
+
+        while (Mathf.Abs(cameraComponent.orthographicSize - targetSize) > 0.01f && 
+               Mathf.Abs(transform.position.x - targetPosition.x) > 0.00f &&
+               Mathf.Abs(transform.position.y - targetPosition.y) > 0.00f)
         {
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime* 0.5f);
             cameraComponent.orthographicSize = Mathf.Lerp(cameraComponent.orthographicSize, targetSize, zoomSpeed * Time.deltaTime);
             yield return null;
         }
