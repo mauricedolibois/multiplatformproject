@@ -20,7 +20,14 @@ public class EnemyFoV : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player"); 
     }
 
-
+    void Update()
+    {
+        if (NavMeshAgent.destination != Vector3.zero)
+        {
+            viewDirection = GetDirection();
+        }
+    }
+    
     public int FindPlayerTarget()
     {
         if (Vector3.Distance(transform.position, player.transform.position) < viewDistance)
@@ -36,12 +43,9 @@ public class EnemyFoV : MonoBehaviour
                         //Player is being seen
                         Debug.Log("This is the player");
                         return (int)EGuardState.Alarmed;
-                    }
-                    else if (raycastHit.collider.CompareTag("Enemy"))
-                    {
-                        Debug.Log("This is the enemy!");;
                     } else {
                         //It hit something else
+                        Debug.Log(raycastHit.collider.name);
                         return (int)EGuardState.Suspicious;
                     }
                 }
@@ -50,11 +54,14 @@ public class EnemyFoV : MonoBehaviour
         return (int)EGuardState.Invalid;
     }
 
-    private void GetDirection()
+    private Vector3 GetDirection()
     {
-        if (NavMeshAgent.destination != Vector3.zero)
+        if (NavMeshAgent.destination != transform.position)
         {
-            viewDirection = NavMeshAgent.destination - transform.position;
+            // Update viewDirection angle to the enemies current direction
+            return viewDirection = GetComponent<Rigidbody2D>().velocity - GetComponent<Rigidbody2D>().position;
         }
+        // Keeps the same viewDirection angle
+        return viewDirection;
     }
 }
