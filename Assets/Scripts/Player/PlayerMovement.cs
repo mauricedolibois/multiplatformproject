@@ -22,7 +22,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     private Rigidbody2D rb;
     private Vector2 movement;
     private bool isMovementAllowed = true;
-
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
