@@ -10,22 +10,18 @@ public class EnemyFoV : MonoBehaviour
     [SerializeField] private float fov = 90f;
     [SerializeField] private float viewDistance = 50f;
     [SerializeField] private Vector3 viewDirection; // Current direction navMeshAgent.destination - transform.position
-    [SerializeField] private GameObject player;
+    private GameObject player;
     private NavMeshAgent NavMeshAgent;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player"); 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        FindPlayerTarget();
-    }
 
-    private void FindPlayerTarget()
+    public int FindPlayerTarget()
     {
         if (Vector3.Distance(transform.position, player.transform.position) < viewDistance)
         {
@@ -39,17 +35,19 @@ public class EnemyFoV : MonoBehaviour
                     {
                         //Player is being seen
                         Debug.Log("This is the player");
+                        return (int)EGuardState.Alarmed;
                     }
                     else if (raycastHit.collider.CompareTag("Enemy"))
                     {
-                        Debug.Log("This is the enemy!");
+                        Debug.Log("This is the enemy!");;
                     } else {
                         //It hit something else
-                        Debug.Log("Object not player lmao");
+                        return (int)EGuardState.Suspicious;
                     }
                 }
             }
         }
+        return (int)EGuardState.Invalid;
     }
 
     private void GetDirection()

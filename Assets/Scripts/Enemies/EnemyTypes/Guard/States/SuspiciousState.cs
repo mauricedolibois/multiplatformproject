@@ -6,6 +6,8 @@ public class SuspiciousState : AStateBehaviour
     private Transform investigationPoint;
     private NavMeshAgent navMeshAgent;
 
+    private EnemyFoV fov;
+
 
     public override bool InitializeState()
     {
@@ -24,6 +26,7 @@ public class SuspiciousState : AStateBehaviour
     public override void OnStateStart()
     {
         Debug.Log("SUSPICIOUS");
+        fov = GetComponent<EnemyFoV>();
         navMeshAgent.SetDestination(investigationPoint.position);
     }
 
@@ -42,6 +45,11 @@ public class SuspiciousState : AStateBehaviour
 
     public override int StateTransitionCondition()
     {
+        var seePlayer = fov.FindPlayerTarget();
+        if (seePlayer == (int)EGuardState.Alarmed)
+        {
+           return seePlayer;
+        }
         return (int)EGuardState.Invalid;
     }
 }

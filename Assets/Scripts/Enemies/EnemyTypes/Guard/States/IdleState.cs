@@ -6,6 +6,9 @@ public class IdleState : AStateBehaviour
     [SerializeField] private float idleDuration = 2f;
     private float idleTimer = 0f;
 
+    private EnemyFoV fov;
+
+
     public override bool InitializeState()
     {
         return true;
@@ -14,6 +17,7 @@ public class IdleState : AStateBehaviour
     public override void OnStateStart()
     {
         Debug.Log("IDLE");
+        fov = GetComponent<EnemyFoV>();
         idleTimer = 0f;
     }
 
@@ -32,8 +36,7 @@ public class IdleState : AStateBehaviour
 
     public override int StateTransitionCondition()
     {
-
-        //add player detection here
-        return (int)EGuardState.Invalid;
+        var seePlayer = fov.FindPlayerTarget();
+        return seePlayer;
     }
 }

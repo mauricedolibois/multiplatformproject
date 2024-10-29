@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,6 +6,8 @@ public class PatrolState : AStateBehaviour
 {
     [SerializeField] private Transform[] waypoints;
     private NavMeshAgent navMeshAgent;
+
+    private EnemyFoV fov;
 
     public override bool InitializeState()
     {
@@ -22,6 +25,7 @@ public class PatrolState : AStateBehaviour
     public override void OnStateStart()
     {
         Debug.Log("PATROL");
+        fov = GetComponent<EnemyFoV>();
         SetNextWaypoint();
     }
 
@@ -47,13 +51,8 @@ public class PatrolState : AStateBehaviour
 
     public override int StateTransitionCondition()
     {
-        //add player detection here
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            return (int)EGuardState.Suspicious;
-        }
-
-        return (int)EGuardState.Invalid; 
+        var seePlayer = fov.FindPlayerTarget();
+        return seePlayer;
     }
 
     private void SetNextWaypoint()
