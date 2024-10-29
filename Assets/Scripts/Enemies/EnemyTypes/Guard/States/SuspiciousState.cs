@@ -4,10 +4,8 @@ using UnityEngine.AI;
 public class SuspiciousState : AStateBehaviour
 {
     private Transform investigationPoint;
-    [SerializeField] private float investigationDuration = 2f;
     private NavMeshAgent navMeshAgent;
-    private bool isInvestigating = false;
-    private float investigationTimer = 0f;
+
 
     public override bool InitializeState()
     {
@@ -25,25 +23,15 @@ public class SuspiciousState : AStateBehaviour
 
     public override void OnStateStart()
     {
-        isInvestigating = false;
-        investigationTimer = 0f;
+        Debug.Log("SUSPICIOUS");
         navMeshAgent.SetDestination(investigationPoint.position);
     }
 
     public override void OnStateUpdate()
     {
-        if (!isInvestigating && !navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.1f)
+        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.1f)
         {
-            isInvestigating = true;
-        }
-
-        if (isInvestigating)
-        {
-            investigationTimer += Time.deltaTime;
-            if (investigationTimer >= investigationDuration)
-            {
-                AssociatedStateMachine.SetState(0); // Transition back to IDLE
-            }
+            AssociatedStateMachine.SetState((int)EGuardState.Idle);
         }
     }
 
@@ -54,6 +42,6 @@ public class SuspiciousState : AStateBehaviour
 
     public override int StateTransitionCondition()
     {
-        return -1; // No transition to other states by default
+        return (int)EGuardState.Invalid;
     }
 }

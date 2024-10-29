@@ -9,7 +9,7 @@ public class AlarmedState : AStateBehaviour
 
     public override void OnStateStart()
     {
-        Debug.Log("Guard is alarmed!");
+        Debug.Log("ALARMED");
     }
 
     public override void OnStateUpdate()
@@ -24,6 +24,6 @@ public class AlarmedState : AStateBehaviour
 
     public override int StateTransitionCondition()
     {
-        return -1; // Default: no transition
+        return (int)EGuardState.Invalid; // Default: no transition
     }
 }

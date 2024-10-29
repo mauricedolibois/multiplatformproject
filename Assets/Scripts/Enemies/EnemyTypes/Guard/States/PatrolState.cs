@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class IdleState : AStateBehaviour
+public class PatrolState : AStateBehaviour
 {
     [SerializeField] private Transform[] waypoints;
-    private int currentWaypointIndex = 0;
     private NavMeshAgent navMeshAgent;
 
     public override bool InitializeState()
@@ -22,7 +21,7 @@ public class IdleState : AStateBehaviour
 
     public override void OnStateStart()
     {
-        currentWaypointIndex = 0;
+        Debug.Log("PATROL");
         SetNextWaypoint();
     }
 
@@ -30,7 +29,13 @@ public class IdleState : AStateBehaviour
     {
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.1f)
         {
-            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+            // 50% chance to switch to Idle state
+            if (Random.Range(0, 100) < 50)
+            {
+                AssociatedStateMachine.SetState((int)EGuardState.Idle); // Transition to IdleState
+                return;
+            }
+            
             SetNextWaypoint();
         }
     }
@@ -42,19 +47,21 @@ public class IdleState : AStateBehaviour
 
     public override int StateTransitionCondition()
     {
+        //add player detection here
         if (Input.GetKeyDown(KeyCode.P))
         {
-            return 1; // Switch to SuspiciousState
+            return (int)EGuardState.Suspicious;
         }
 
-        return -1; // No transition
+        return (int)EGuardState.Invalid; 
     }
 
     private void SetNextWaypoint()
     {
         if (waypoints.Length > 0)
         {
-            navMeshAgent.SetDestination(waypoints[currentWaypointIndex].position);
+            int randomIndex = Random.Range(0, waypoints.Length);
+            navMeshAgent.SetDestination(waypoints[randomIndex].position);
         }
     }
 }
