@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class OnShiftPressed : UnityEvent { }
 public class OnShiftReleased : UnityEvent { }
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Singleton<PlayerMovement>
 {
     public static class Constants
     {
