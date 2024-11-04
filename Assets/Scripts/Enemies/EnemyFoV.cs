@@ -83,7 +83,7 @@ public class EnemyFoV : MonoBehaviour
         }
         else
         {
-            return suspicion + 100 * Time.deltaTime;
+            return suspicion + 30 * Time.deltaTime;
         }
     }
 }
