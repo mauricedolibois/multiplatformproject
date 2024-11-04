@@ -16,8 +16,11 @@ public class ImmediateDetection : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collider collider)
+    private void OnCollisionEnter2D(Collision2D collider)
     {
-        Debug.Log(collider.gameObject.name);
+        if (collider.gameObject.CompareTag("Player"))
+        {
+            Debug.Log(collider.gameObject.name);
+        }
     }
 }
