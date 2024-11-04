@@ -77,6 +77,13 @@ public class EnemyFoV : MonoBehaviour
 
     private float raiseSuspicion(float suspicion)
     {
-        return suspicion + 15 * Time.deltaTime;
+        if (Vector3.Distance(transform.position, player.transform.position) > viewDistance / 2)
+        {
+            return suspicion + 15 * Time.deltaTime;
+        }
+        else
+        {
+            return suspicion + 100 * Time.deltaTime;
+        }
     }
 }
