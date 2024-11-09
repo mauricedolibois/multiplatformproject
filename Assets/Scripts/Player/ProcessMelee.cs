@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class ImmediateDetection : MonoBehaviour
+public class ProcessMelee : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,12 +16,12 @@ public class ImmediateDetection : MonoBehaviour
     {
         
     }
-
-    private void OnCollisionEnter2D(Collision2D collider)
+    
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collider.gameObject.CompareTag("Player"))
+        if (other.GameObject().CompareTag("Enemy"))
         {
-            Debug.Log(collider.gameObject.name);
+            other.GameObject().SetActive(false);
         }
     }
 }

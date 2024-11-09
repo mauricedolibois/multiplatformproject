@@ -7,6 +7,7 @@ public class SuspiciousState : AStateBehaviour
     private NavMeshAgent navMeshAgent;
 
     private EnemyFoV fov;
+    private ImmediateDetection detection;
 
 
     public override bool InitializeState()
@@ -27,6 +28,8 @@ public class SuspiciousState : AStateBehaviour
     {
         Debug.Log("SUSPICIOUS");
         fov = GetComponent<EnemyFoV>();
+        detection = GetComponentInChildren<ImmediateDetection>();
+        detection.detected = false;
         navMeshAgent.SetDestination(investigationPoint.position);
     }
 
@@ -45,10 +48,13 @@ public class SuspiciousState : AStateBehaviour
 
     public override int StateTransitionCondition()
     {
-        var seePlayer = fov.FindPlayerTarget();
-        if (seePlayer == (int)EGuardState.Alarmed)
+        if (fov.FindPlayerTarget() != (int)EGuardState.Invalid)
         {
-           return seePlayer;
+            return fov.FindPlayerTarget();    
+        }
+        else if (detection.detected)
+        {
+            return (int)EGuardState.Alarmed;
         }
         return (int)EGuardState.Invalid;
     }
