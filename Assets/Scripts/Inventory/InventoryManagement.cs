@@ -22,19 +22,21 @@ public class InventoryManagement : MonoBehaviour
             InventoryMenu.SetActive(menuActivated);
         }
     }
-
-
     
-    public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
+    
+    public int AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
     {
         for (int i = 0; i < itemSlot.Length; i++)
         {
-            if (itemSlot[i].isFull == false)
+            if (itemSlot[i].isFull == false && itemSlot[i].itemName == itemName || itemSlot[i].quantity == 0)
             {
-                itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
-                return;
+                int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
+                if (leftOverItems > 0)
+                    leftOverItems = AddItem(itemName, quantity, itemSprite, itemDescription);
+                return leftOverItems;
             }
         }
+        return quantity;
     }
 
     public void DeselectAllSlots()

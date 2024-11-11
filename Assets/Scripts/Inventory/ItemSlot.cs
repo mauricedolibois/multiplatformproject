@@ -14,6 +14,10 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public int quantity;
     public Sprite itemSprite;
     public bool isFull;
+    public string itemDescription;
+    
+    [SerializeField]
+    private int maxNumberOfItems;
     
     //ITEM SLOT
     [SerializeField]
@@ -36,16 +40,31 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     {
         inventoryManagement = GameObject.Find("InventoryCanvas").GetComponent<InventoryManagement>();
     }
-    public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
+    public int AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
     {
-        this.itemName = itemName;
-        this.quantity = quantity;
-        this.itemSprite = itemSprite;
-        isFull = true;
+        if(isFull)
+            return quantity;
         
-        quantityText.text = quantity.ToString();
-        quantityText.enabled = true;
+        this.itemName = itemName;
+        this.itemSprite = itemSprite;
+        this.itemDescription = itemDescription;
         itemImage.sprite = itemSprite;
+        
+        this.quantity += quantity;
+        if (this.quantity >= maxNumberOfItems)
+        {
+            quantityText.text = maxNumberOfItems.ToString();
+            quantityText.enabled = true;
+            isFull = true;
+
+            int extraItems = this.quantity - maxNumberOfItems;
+            this.quantity = maxNumberOfItems;
+            return extraItems;
+        }
+        quantityText.text = this.quantity.ToString();
+        quantityText.enabled = true;
+
+        return 0;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -65,6 +84,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         inventoryManagement.DeselectAllSlots();
         selectedShader.SetActive(true);
         thisItemSelected = true;
+        itemNameText.text = itemName;
+        itemDescriptionText.text = itemDescription;
+        itemDescriptionImage.sprite = itemSprite;
     }
     public void OnRightClick()
     {
