@@ -1,4 +1,5 @@
 using TreeEditor;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,8 +18,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     [SerializeField] private float moveSpeed = 1.0f;
     
-    private int scaleX = 1;
-    private int scaleY = 1;
+
     private GameObject FacingTriangle;
     private SpriteRenderer spriteRenderer;
     private GameObject melee;
@@ -62,15 +62,19 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     private void LookInDirection()
     {
+        float scaleX = transform.localScale.x;
+        float scaleY = transform.localScale.y;
+        float scaleZ = transform.localScale.z;
+
         if (movement == Vector2.zero)
         {
             return;
         }
 
-        if (Input.GetAxis("Horizontal") < 0 && scaleX == 1 || Input.GetAxis("Horizontal") > 0 && scaleX == -1)
+        if (Input.GetAxis("Horizontal") < 0 && scaleX >0 || Input.GetAxis("Horizontal") > 0 && scaleX < 0)
         {
             scaleX *= -1;
-            transform.localScale = new Vector3(scaleX, scaleY, 1);
+            transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
             Vector3 position = spriteRenderer.bounds.center;
             position.x += 0.5f * scaleX;
             FacingTriangle.transform.position = position;

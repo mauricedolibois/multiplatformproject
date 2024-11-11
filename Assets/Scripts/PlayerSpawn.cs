@@ -6,6 +6,7 @@ public class PlayerSpawn : MonoBehaviour
 {
 
     [SerializeField] private string transitionName;
+    [SerializeField] private Vector3 playerScale;
 
     private void Start()
     {
@@ -13,5 +14,6 @@ public class PlayerSpawn : MonoBehaviour
         {
             PlayerMovement.Instance.transform.position = transform.position;
         }
+        PlayerMovement.Instance.transform.localScale = playerScale;
     }
 }
