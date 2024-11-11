@@ -19,12 +19,10 @@ public class ActivateMelee : MonoBehaviour
     {
         if (!melee.activeInHierarchy)
         {
-            timer = 0f;
-            MakeMeleeActive();
-            return;
+            if (Input.GetMouseButtonDown(0))
+                MakeMeleeActive();
         }
-        
-        if (timer < maxTime)
+        else if (timer < maxTime)
         {
             timer += Time.deltaTime;
         }
@@ -36,8 +34,9 @@ public class ActivateMelee : MonoBehaviour
 
     private void MakeMeleeActive()
     {
-        if (Input.GetMouseButtonDown(0))
+        //if (Input.GetMouseButtonDown(0))
         {
+            timer = 0f;
             melee.SetActive(true);
         }
     }
