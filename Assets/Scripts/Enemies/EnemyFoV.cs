@@ -12,7 +12,7 @@ public class EnemyFoV : MonoBehaviour
     [SerializeField] private Vector3 viewDirection; // Current direction navMeshAgent.destination - transform.position
     private GameObject player;
     private NavMeshAgent NavMeshAgent;
-    private float suspicionLevel = 0f;
+    public float suspicionLevel = 0f;
     
     // Start is called before the first frame update
     void Start()

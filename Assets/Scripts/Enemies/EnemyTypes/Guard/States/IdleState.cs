@@ -7,6 +7,7 @@ public class IdleState : AStateBehaviour
     private float idleTimer = 0f;
 
     private EnemyFoV fov;
+    private ImmediateDetection detection;
 
 
     public override bool InitializeState()
@@ -18,6 +19,8 @@ public class IdleState : AStateBehaviour
     {
         Debug.Log("IDLE");
         fov = GetComponent<EnemyFoV>();
+        detection = GetComponentInChildren<ImmediateDetection>();
+        detection.detected = false;
         idleTimer = 0f;
     }
 
@@ -28,6 +31,7 @@ public class IdleState : AStateBehaviour
             {
                 AssociatedStateMachine.SetState((int)EGuardState.Patrol); // Transition back to Patroling
             }
+            // fov.suspicionLevel = lowerSuspicion(fov.suspicionLevel);
     }
 
     public override void OnStateEnd()
@@ -36,7 +40,23 @@ public class IdleState : AStateBehaviour
 
     public override int StateTransitionCondition()
     {
-        var seePlayer = fov.FindPlayerTarget();
-        return seePlayer;
+        if (fov.FindPlayerTarget() != (int)EGuardState.Invalid)
+        {
+            return fov.FindPlayerTarget();    
+        }
+        else if (detection.detected)
+        {
+            return (int)EGuardState.Alarmed;
+        }
+        return (int)EGuardState.Invalid;
     }
+
+    // private float lowerSuspicion(float suspicion)
+    // {
+    //     if (suspicion > 0f)
+    //     {
+    //         return suspicion - 15 * Time.deltaTime;
+    //     }
+    //     return suspicion;
+    // }
 }

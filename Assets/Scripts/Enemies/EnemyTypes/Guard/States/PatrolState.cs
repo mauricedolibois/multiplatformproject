@@ -8,6 +8,7 @@ public class PatrolState : AStateBehaviour
     private NavMeshAgent navMeshAgent;
 
     private EnemyFoV fov;
+    private ImmediateDetection detection;
 
     public override bool InitializeState()
     {
@@ -26,6 +27,8 @@ public class PatrolState : AStateBehaviour
     {
         Debug.Log("PATROL");
         fov = GetComponent<EnemyFoV>();
+        detection = GetComponentInChildren<ImmediateDetection>();
+        detection.detected = false;
         SetNextWaypoint();
     }
 
@@ -41,6 +44,8 @@ public class PatrolState : AStateBehaviour
             }
             
             SetNextWaypoint();
+            
+            // fov.suspicionLevel = lowerSuspicion(fov.suspicionLevel);
         }
     }
 
@@ -48,13 +53,20 @@ public class PatrolState : AStateBehaviour
     {
         navMeshAgent.ResetPath();
     }
-
+    
     public override int StateTransitionCondition()
     {
-        var seePlayer = fov.FindPlayerTarget();
-        return seePlayer;
+        if (fov.FindPlayerTarget() != (int)EGuardState.Invalid)
+        {
+            return fov.FindPlayerTarget();    
+        }
+        else if (detection.detected)
+        {
+            return (int)EGuardState.Alarmed;
+        }
+        return (int)EGuardState.Invalid;
     }
-
+    
     private void SetNextWaypoint()
     {
         if (waypoints.Length > 0)
@@ -63,4 +75,13 @@ public class PatrolState : AStateBehaviour
             navMeshAgent.SetDestination(waypoints[randomIndex].position);
         }
     }
+    
+    // private float lowerSuspicion(float suspicion)
+    // {
+    //     if (suspicion > 0f)
+    //     {
+    //         return suspicion - 15 * Time.deltaTime;
+    //     }
+    //     return suspicion;
+    // }
 }
