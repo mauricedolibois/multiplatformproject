@@ -10,7 +10,7 @@ public class PlayerSpawn : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManagement.Instance.SceneTransitionName == transitionName);
+        if (SceneManagement.Instance.SceneTransitionName == transitionName)
         {
             PlayerMovement.Instance.transform.position = transform.position;
         }

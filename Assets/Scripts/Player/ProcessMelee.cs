@@ -19,9 +19,9 @@ public class ProcessMelee : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GameObject().CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            other.GameObject().SetActive(false);
+            other.gameObject.SetActive(false);
         }
     }
 }
