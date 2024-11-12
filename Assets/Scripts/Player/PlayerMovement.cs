@@ -19,10 +19,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [SerializeField] private float moveSpeed = 1.0f;
     
 
-    private GameObject FacingTriangle;
+    private Transform directionIndicator;
     private SpriteRenderer spriteRenderer;
     private GameObject melee;
     private float meleeOffset;
+    [SerializeField] private float indicatorRadius = 1f;
 
     public OnShiftPressed onShiftPressedEvent = new(); 
     public OnShiftReleased onShiftReleasedEvent = new(); 
@@ -35,7 +36,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     {
         rb = GetComponent<Rigidbody2D>();
         
-        FacingTriangle = transform.GetChild(0).gameObject;
+        directionIndicator = transform.GetChild(0);
         
         spriteRenderer = GetComponent<SpriteRenderer>();
         
@@ -62,45 +63,54 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     private void LookInDirection()
     {
-        float scaleX = transform.localScale.x;
-        float scaleY = transform.localScale.y;
-        float scaleZ = transform.localScale.z;
+        // float scaleX = transform.localScale.x;
+        // float scaleY = transform.localScale.y;
+        // float scaleZ = transform.localScale.z;
+        
+        Vector3 movementDirection = rb.velocity.normalized;
 
         if (movement == Vector2.zero)
         {
             return;
         }
 
-        if (Input.GetAxis("Horizontal") < 0 && scaleX >0 || Input.GetAxis("Horizontal") > 0 && scaleX < 0)
-        {
-            scaleX *= -1;
-            transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
-            Vector3 position = spriteRenderer.bounds.center;
-            position.x += 0.5f * scaleX;
-            FacingTriangle.transform.position = position;
-            meleeOffset = FacingTriangle.GetComponent<SpriteRenderer>().bounds.size.x / 2;
-            position.x += meleeOffset * scaleX;
-            melee.transform.position = position;
-        }
+        // Calculate the target position for the triangle based on movement direction
+        Vector3 targetPosition = transform.position + movementDirection * indicatorRadius;
 
-        if (Input.GetAxis("Vertical") > 0)
-        {
-            Vector3 position = spriteRenderer.bounds.max;
-            position.x = spriteRenderer.bounds.center.x;
-            FacingTriangle.transform.position = position;
-            meleeOffset = FacingTriangle.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-            position.y += meleeOffset;
-            melee.transform.position = position;
-        }
-        else if (Input.GetAxis("Vertical") < 0)
-        {
-            Vector3 position = spriteRenderer.bounds.min;
-            position.x = spriteRenderer.bounds.center.x;
-            FacingTriangle.transform.position = position;
-            meleeOffset = FacingTriangle.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-            position.y -= meleeOffset;
-            melee.transform.position = position;
-        }
+        // Update the triangle position and rotation to face the movement direction
+        directionIndicator.position = targetPosition;
+        directionIndicator.rotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
+        
+        // if (Input.GetAxis("Horizontal") < 0 && scaleX >0 || Input.GetAxis("Horizontal") > 0 && scaleX < 0)
+        // {
+        //     scaleX *= -1;
+        //     transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
+        //     Vector3 position = spriteRenderer.bounds.center;
+        //     position.x += 0.5f * scaleX;
+        //     directionIndicator.transform.position = position;
+        //     meleeOffset = directionIndicator.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+        //     position.x += meleeOffset * scaleX;
+        //     melee.transform.position = position;
+        // }
+        //
+        // if (Input.GetAxis("Vertical") > 0)
+        // {
+        //     Vector3 position = spriteRenderer.bounds.max;
+        //     position.x = spriteRenderer.bounds.center.x;
+        //     directionIndicator.transform.position = position;
+        //     meleeOffset = directionIndicator.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+        //     position.y += meleeOffset;
+        //     melee.transform.position = position;
+        // }
+        // else if (Input.GetAxis("Vertical") < 0)
+        // {
+        //     Vector3 position = spriteRenderer.bounds.min;
+        //     position.x = spriteRenderer.bounds.center.x;
+        //     directionIndicator.transform.position = position;
+        //     meleeOffset = directionIndicator.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+        //     position.y -= meleeOffset;
+        //     melee.transform.position = position;
+        // }
     }
 
     private void HandleInput()

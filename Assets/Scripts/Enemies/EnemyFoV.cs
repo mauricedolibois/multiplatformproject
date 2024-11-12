@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
 using Vector3 = UnityEngine.Vector3;
@@ -11,22 +10,28 @@ public class EnemyFoV : MonoBehaviour
     [SerializeField] private float viewDistance = 50f;
     [SerializeField] private Vector3 viewDirection; // Current direction navMeshAgent.destination - transform.position
     private GameObject player;
-    private NavMeshAgent NavMeshAgent;
+    private NavMeshAgent navMeshAgent;
     public float suspicionLevel = 0f;
+
+    private Transform directionIndicator;
+    [SerializeField] private float indicatorRadius = 1f;
     
     // Start is called before the first frame update
     void Start()
     {
-        NavMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player"); 
+        directionIndicator = transform.GetChild(0);
     }
 
     void Update()
     {
-        if (NavMeshAgent.destination != Vector3.zero)
+        if (navMeshAgent.destination != Vector3.zero)
         {
             viewDirection = GetDirection();
         }
+        
+        LookInDirection();
     }
     
     public int FindPlayerTarget()
@@ -41,8 +46,8 @@ public class EnemyFoV : MonoBehaviour
                 {
                     if (raycastHit.collider.CompareTag("Player"))
                     {
-                        // If the player is directly being seen, raises suspicion level
-                        suspicionLevel = raiseSuspicion(suspicionLevel);
+                        // If the player is directly being seen, Raises suspicion level
+                        suspicionLevel = RaiseSuspicion(suspicionLevel);
                         Debug.Log($"This is the player and suspicion level is {suspicionLevel}");
                         if (suspicionLevel >= 100f)
                         {
@@ -66,16 +71,16 @@ public class EnemyFoV : MonoBehaviour
 
     private Vector3 GetDirection()
     {
-        if (NavMeshAgent.destination != transform.position)
+        if (navMeshAgent.destination != transform.position)
         {
             // Update viewDirection angle to the enemies current facing direction
-            return viewDirection = GetComponent<Rigidbody2D>().velocity - GetComponent<Rigidbody2D>().position;
+            return (transform.position - navMeshAgent.destination).normalized;
         }
         // Keeps the same viewDirection angle
         return viewDirection;
     }
 
-    private float raiseSuspicion(float suspicion)
+    private float RaiseSuspicion(float suspicion)
     {
         if (Vector3.Distance(transform.position, player.transform.position) > viewDistance / 2)
         {
@@ -85,5 +90,22 @@ public class EnemyFoV : MonoBehaviour
         {
             return suspicion + 30 * Time.deltaTime;
         }
+    }
+    
+    private void LookInDirection()
+    {
+        Vector3 movementDirection = navMeshAgent.velocity.normalized;
+
+        if (movementDirection == Vector3.zero)
+        {
+            return;
+        }
+        
+        // Calculate the target position for the triangle based on movement direction
+        Vector3 targetPosition = transform.position + movementDirection * indicatorRadius;
+
+        // Update the triangle position and rotation to face the movement direction
+        directionIndicator.position = targetPosition;
+        directionIndicator.rotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
     }
 }
