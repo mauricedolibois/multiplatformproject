@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManagement : MonoBehaviour
+public class InventoryManagement : Singleton<InventoryManagement>
+
 {
     public GameObject InventoryMenu;
     private bool menuActivated = false;
