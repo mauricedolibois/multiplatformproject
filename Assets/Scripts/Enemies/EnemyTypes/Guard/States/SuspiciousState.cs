@@ -31,6 +31,8 @@ public class SuspiciousState : AStateBehaviour
         detection = GetComponentInChildren<ImmediateDetection>();
         detection.detected = false;
         navMeshAgent.SetDestination(investigationPoint.position);
+        EnemySignToggle signToggle = GetComponent<EnemySignToggle>();
+        signToggle.ShowQuestionMark();
     }
 
     public override void OnStateUpdate()

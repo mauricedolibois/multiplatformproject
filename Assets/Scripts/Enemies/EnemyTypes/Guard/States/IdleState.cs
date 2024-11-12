@@ -22,6 +22,8 @@ public class IdleState : AStateBehaviour
         detection = GetComponentInChildren<ImmediateDetection>();
         detection.detected = false;
         idleTimer = 0f;
+        EnemySignToggle signToggle = GetComponent<EnemySignToggle>();
+        signToggle.HideSigns();
     }
 
     public override void OnStateUpdate()

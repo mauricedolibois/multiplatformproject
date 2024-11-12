@@ -29,6 +29,8 @@ public class PatrolState : AStateBehaviour
         fov = GetComponent<EnemyFoV>();
         detection = GetComponentInChildren<ImmediateDetection>();
         detection.detected = false;
+        EnemySignToggle signToggle = GetComponent<EnemySignToggle>();
+        signToggle.HideSigns();
         SetNextWaypoint();
     }
 

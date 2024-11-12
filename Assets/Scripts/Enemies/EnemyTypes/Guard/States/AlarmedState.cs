@@ -10,6 +10,8 @@ public class AlarmedState : AStateBehaviour
     public override void OnStateStart()
     {
         Debug.Log("ALARMED");
+        EnemySignToggle signToggle = GetComponent<EnemySignToggle>();
+        signToggle.ShowExclamationMark();
     }
 
     public override void OnStateUpdate()
