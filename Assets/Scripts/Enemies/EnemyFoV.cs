@@ -39,7 +39,7 @@ public class EnemyFoV : MonoBehaviour
         if (Vector3.Distance(transform.position, player.transform.position) < viewDistance) // If the player is close enough activate the code
         {
             Vector3 directionToPlayer = (player.transform.position - transform.position).normalized; // Check direction to the player
-            if (Vector3.Angle(viewDirection, directionToPlayer) > fov / 2) //Check if the direction to the player is the same to the direction the enemy is facing
+            if (Vector3.Angle(viewDirection, directionToPlayer) < fov / 2) //Check if the direction to the player is the same to the direction the enemy is facing
             {
                 RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, directionToPlayer, viewDistance); // Cast a ray in the direction of the player
                 if (raycastHit.collider != null)
@@ -48,14 +48,14 @@ public class EnemyFoV : MonoBehaviour
                     {
                         // If the player is directly being seen, Raises suspicion level
                         suspicionLevel = RaiseSuspicion(suspicionLevel);
-                        Debug.Log($"This is the player and suspicion level is {suspicionLevel}");
+                        Debug.Log($"This is the player and suspicion level is {suspicionLevel}"); 
                         if (suspicionLevel >= 100f)
-                        {
-                        return (int)EGuardState.Alarmed;
+                        { 
+                            return (int)EGuardState.Alarmed;
                         } else if (suspicionLevel >= 50f)
                         {
-                        return (int)EGuardState.Suspicious;
-                    }
+                            return (int)EGuardState.Suspicious;
+                        }
                     } else {
                         //It hit something else
                         Debug.Log(raycastHit.collider.name);
@@ -68,10 +68,12 @@ public class EnemyFoV : MonoBehaviour
     }
     private Vector3 GetDirection()
     {
+        Vector3 movementDirection = navMeshAgent.velocity.normalized;
+        
         if (navMeshAgent.destination != transform.position)
         {
             // Update viewDirection angle to the enemies current facing direction
-            return (transform.position - navMeshAgent.destination).normalized;
+            return movementDirection;
         }
         // Keeps the same viewDirection angle
         return viewDirection;
