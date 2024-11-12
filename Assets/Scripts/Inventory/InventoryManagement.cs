@@ -23,8 +23,18 @@ public class InventoryManagement : Singleton<InventoryManagement>
             InventoryMenu.SetActive(menuActivated);
         }
     }
-    
-    
+
+    public bool FindItem(string itemName)
+    {
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            if (itemSlot[i].itemName.Equals(itemName) && itemSlot[i].quantity > 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     public int AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
     {
         for (int i = 0; i < itemSlot.Length; i++)
