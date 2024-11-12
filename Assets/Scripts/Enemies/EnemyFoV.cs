@@ -15,7 +15,7 @@ public class EnemyFoV : MonoBehaviour
 
     private Transform directionIndicator;
     [SerializeField] private float indicatorRadius = 1f;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,6 @@ public class EnemyFoV : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player"); 
         directionIndicator = transform.GetChild(0);
     }
-
     void Update()
     {
         if (navMeshAgent.destination != Vector3.zero)
@@ -32,6 +31,7 @@ public class EnemyFoV : MonoBehaviour
         }
         
         LookInDirection();
+        DrawDebugLines();
     }
     
     public int FindPlayerTarget()
@@ -51,13 +51,11 @@ public class EnemyFoV : MonoBehaviour
                         Debug.Log($"This is the player and suspicion level is {suspicionLevel}");
                         if (suspicionLevel >= 100f)
                         {
-                            // If the suspicion level is equal or higher than 100, enemy has fully detected the player and it's game over
-                            return (int)EGuardState.Alarmed;
+                        return (int)EGuardState.Alarmed;
                         } else if (suspicionLevel >= 50f)
                         {
-                            // If the suspicion level is equal or higher than 50, then enemy is suspicious and will walk in the direction of the player
-                            return (int)EGuardState.Suspicious;
-                        }
+                        return (int)EGuardState.Suspicious;
+                    }
                     } else {
                         //It hit something else
                         Debug.Log(raycastHit.collider.name);
@@ -68,7 +66,6 @@ public class EnemyFoV : MonoBehaviour
         }
         return (int)EGuardState.Invalid;
     }
-
     private Vector3 GetDirection()
     {
         if (navMeshAgent.destination != transform.position)
@@ -108,4 +105,22 @@ public class EnemyFoV : MonoBehaviour
         directionIndicator.position = targetPosition;
         directionIndicator.rotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
     }
+
+    private void DrawDebugLines()
+{
+    //use the movement direction to draw the view cone
+    Vector3 movementDirection = navMeshAgent.velocity.normalized;
+    Debug.DrawLine(transform.position, transform.position + movementDirection *viewDistance, Color.green);
+    Vector3 moveLeftDirection = Quaternion.Euler(0, 0, fov / 2) * movementDirection;
+    Vector3 moveRightDirection = Quaternion.Euler(0, 0, -fov / 2) * movementDirection;
+    Debug.DrawLine(transform.position, transform.position + moveLeftDirection *viewDistance, Color.green);
+    Debug.DrawLine(transform.position, transform.position + moveRightDirection *viewDistance, Color.green);
+
+    //use the current view direction to draw the view cone
+    Debug.DrawLine(transform.position, transform.position + viewDirection * viewDistance, Color.red);
+    Vector3 leftViewDirection = Quaternion.Euler(0, 0, fov / 2) * viewDirection;
+    Vector3 rightViewDirection = Quaternion.Euler(0, 0, -fov / 2) * viewDirection;
+    Debug.DrawLine(transform.position, transform.position + leftViewDirection * viewDistance, Color.red);
+    Debug.DrawLine(transform.position, transform.position + rightViewDirection * viewDistance, Color.red);
+}
 }
