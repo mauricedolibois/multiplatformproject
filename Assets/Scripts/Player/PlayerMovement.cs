@@ -36,7 +36,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     {
         rb = GetComponent<Rigidbody2D>();
         
-        directionIndicator = transform.GetChild(0);
+        directionIndicator = transform.GetChild(0).transform;
         
         spriteRenderer = GetComponent<SpriteRenderer>();
         

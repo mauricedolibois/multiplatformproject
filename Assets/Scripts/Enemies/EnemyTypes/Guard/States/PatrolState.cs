@@ -60,7 +60,7 @@ public class PatrolState : AStateBehaviour
     {
         if (fov.FindPlayerTarget() != (int)EGuardState.Invalid)
         {
-            return fov.FindPlayerTarget();    
+            return fov.FindPlayerTarget();   
         }
         else if (detection.detected)
         {

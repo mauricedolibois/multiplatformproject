@@ -21,11 +21,11 @@ public class EnemyFoV : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player"); 
-        directionIndicator = transform.GetChild(0);
+        directionIndicator = transform.GetChild(0).transform;
     }
     void Update()
     {
-        if (navMeshAgent.destination != Vector3.zero)
+        if (navMeshAgent.velocity != Vector3.zero)
         {
             viewDirection = GetDirection();
         }
@@ -43,7 +43,7 @@ public class EnemyFoV : MonoBehaviour
             {
                 RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, directionToPlayer, viewDistance); // Cast a ray in the direction of the player
                 if (raycastHit.collider != null)
-                {
+                {       
                     if (raycastHit.collider.CompareTag("Player"))
                     {
                         // If the player is directly being seen, Raises suspicion level
@@ -52,7 +52,7 @@ public class EnemyFoV : MonoBehaviour
                         if (suspicionLevel >= 100f)
                         { 
                             return (int)EGuardState.Alarmed;
-                        } else if (suspicionLevel >= 50f)
+                        } if (suspicionLevel >= 50f)
                         {
                             return (int)EGuardState.Suspicious;
                         }
@@ -68,15 +68,7 @@ public class EnemyFoV : MonoBehaviour
     }
     private Vector3 GetDirection()
     {
-        Vector3 movementDirection = navMeshAgent.velocity.normalized;
-        
-        if (movementDirection != Vector3.zero)
-        {
-            // Update viewDirection angle to the enemies current facing direction
-            return movementDirection;
-        }
-        // Keeps the same viewDirection angle
-        return viewDirection;
+        return navMeshAgent.velocity.normalized;
     }
 
     private float RaiseSuspicion(float suspicion)
