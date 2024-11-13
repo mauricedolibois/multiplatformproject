@@ -6,8 +6,8 @@ using Vector3 = UnityEngine.Vector3;
 
 public class EnemyFoV : MonoBehaviour
 {
-    [SerializeField] private float fov = 90f;
-    [SerializeField] private float viewDistance = 50f;
+    [SerializeField] private float fov = 30f;
+    [SerializeField] private float viewDistance = 10f;
     [SerializeField] private Vector3 viewDirection; // Current direction navMeshAgent.destination - transform.position
     private GameObject player;
     private NavMeshAgent navMeshAgent;
@@ -70,7 +70,7 @@ public class EnemyFoV : MonoBehaviour
     {
         Vector3 movementDirection = navMeshAgent.velocity.normalized;
         
-        if (navMeshAgent.destination != transform.position)
+        if (movementDirection != Vector3.zero)
         {
             // Update viewDirection angle to the enemies current facing direction
             return movementDirection;

@@ -3725,6 +3725,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6201505693743196494, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
+      propertyPath: fov
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201505693743196494, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
+      propertyPath: viewDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201505693743196494, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
       propertyPath: viewDirection.y
       value: 0
       objectReference: {fileID: 0}
@@ -3810,6 +3818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  indicatorRadius: 1
 --- !u!70 &430411476
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
