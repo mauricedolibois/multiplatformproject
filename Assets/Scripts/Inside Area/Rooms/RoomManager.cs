@@ -8,9 +8,10 @@ public class RoomManager : MonoBehaviour
 
     void Start()
     {
-        if (startingRoom != null){
-        insideCamera = Camera.main.GetComponent<InsideCamera>();
-        EnterRoom(startingRoom);
+        if (startingRoom != null)
+        {
+            insideCamera = Camera.main.GetComponent<InsideCamera>();
+            EnterRoom(startingRoom);
         }
     }
 

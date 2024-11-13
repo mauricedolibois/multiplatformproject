@@ -14,6 +14,7 @@ public class EnemyFoV : MonoBehaviour
     public float suspicionLevel = 0f;
 
     private Transform directionIndicator;
+    private Transform detectionBox;
     [SerializeField] private float indicatorRadius = 1f;
 
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class EnemyFoV : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player"); 
         directionIndicator = transform.GetChild(0).transform;
+        detectionBox = transform.GetChild(1).transform;
     }
     void Update()
     {
@@ -42,6 +44,7 @@ public class EnemyFoV : MonoBehaviour
             if (Vector3.Angle(viewDirection, directionToPlayer) < fov / 2) //Check if the direction to the player is the same to the direction the enemy is facing
             {
                 RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, directionToPlayer, viewDistance); // Cast a ray in the direction of the player
+                Debug.DrawRay(transform.position, directionToPlayer * 10, Color.blue, 10f);
                 if (raycastHit.collider != null)
                 {       
                     if (raycastHit.collider.CompareTag("Player"))
@@ -93,10 +96,13 @@ public class EnemyFoV : MonoBehaviour
         }
         
         // Calculate the target position for the triangle based on movement direction
-        Vector3 targetPosition = transform.position + movementDirection * indicatorRadius;
+        Vector3 targetPosition = transform.position + movementDirection;
 
         // Update the triangle position and rotation to face the movement direction
-        directionIndicator.position = targetPosition;
+        detectionBox.position = targetPosition - detectionBox.();
+        detectionBox.rotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
+            
+        directionIndicator.position = targetPosition * indicatorRadius;
         directionIndicator.rotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
     }
 

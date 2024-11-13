@@ -2956,7 +2956,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1252602585}
   - component: {fileID: 1252602584}
-  - component: {fileID: 1252602586}
   m_Layer: 0
   m_Name: Room1
   m_TagString: Untagged
@@ -2997,51 +2996,6 @@ Transform:
   - {fileID: 932347444}
   m_Father: {fileID: 933366060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1252602586
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1252602583}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.49394703, y: -0.08648491}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 29.045275, y: 11.41864}
-  m_EdgeRadius: 0
 --- !u!1 &1259816944
 GameObject:
   m_ObjectHideFlags: 0
@@ -7983,16 +7937,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6201505693743196494, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
       propertyPath: fov
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6201505693743196494, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
       propertyPath: viewDistance
-      value: 20
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201505693743196494, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
+      propertyPath: viewDirection.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201505693743196494, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
+      propertyPath: viewDirection.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7203530538068800724, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
       propertyPath: m_Name
       value: Enemy Guard
       objectReference: {fileID: 0}
+    - target: {fileID: 7991964526689941716, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
+      propertyPath: stateBehaviours.Array.data[0]
+      value: 
+      objectReference: {fileID: 2069564479}
+    - target: {fileID: 7991964526689941716, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
+      propertyPath: stateBehaviours.Array.data[1]
+      value: 
+      objectReference: {fileID: 2069564477}
     - target: {fileID: 8706681299374701883, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
       propertyPath: waypoints.Array.size
       value: 4
@@ -8311,6 +8281,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1795307999}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2069564477 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8706681299374701883, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
+  m_PrefabInstance: {fileID: 1748943669}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a036850bb915ba4695470442416832e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2069564479 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9079874422997373026, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
+  m_PrefabInstance: {fileID: 1748943669}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d70974f8ea83e4692b3a2b479d623b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2113540532
 GameObject:
   m_ObjectHideFlags: 0
