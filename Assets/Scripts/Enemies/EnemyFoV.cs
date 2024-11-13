@@ -99,7 +99,7 @@ public class EnemyFoV : MonoBehaviour
         Vector3 targetPosition = transform.position + movementDirection;
 
         // Update the triangle position and rotation to face the movement direction
-        detectionBox.position = targetPosition - detectionBox.();
+        detectionBox.position = targetPosition;
         detectionBox.rotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
             
         directionIndicator.position = targetPosition * indicatorRadius;
