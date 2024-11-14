@@ -18,23 +18,39 @@ public class Item : MonoBehaviour
     [TextArea]
     [SerializeField] 
     private string itemDescription;
-    
+
     private InventoryManagement inventoryManager;
-    // Start is called before the first frame update
+    
+    //make sure they do not respawn after scene changing
+    [SerializeField] private string itemId;
+    private static HashSet<string> collectedItems = new HashSet<string>();
+    
     void Start()
     {
+        if (collectedItems.Contains(itemId))
+        {
+            Destroy(gameObject); 
+            return;
+        }
+        
         inventoryManager = GameObject.Find("UICanvas").GetComponent<InventoryManagement>();
     }
     
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             int leftOverItems = inventoryManager.AddItem(itemName, quantity, sprite, itemDescription);
+
             if (leftOverItems <= 0)
-                Destroy(gameObject);
-            else 
+            {
+                collectedItems.Add(itemId);
+                gameObject.SetActive(false); 
+            }
+            else
+            {
                 quantity = leftOverItems;
+            }
         }
     }
 }
