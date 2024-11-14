@@ -722,6 +722,7 @@ MonoBehaviour:
   viewDirection: {x: 0, y: 0, z: 0}
   suspicionLevel: 0
   indicatorRadius: 1
+  detectionBoxRadius: 0.2
 --- !u!114 &2387933262738584164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,8 +765,8 @@ Transform:
   m_GameObject: {fileID: 7980324184948952694}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0037, y: -0.82, z: 0}
-  m_LocalScale: {x: 3.4885907, y: 1.1617035, z: 0.8333}
+  m_LocalPosition: {x: 0.0017, y: -0.9952, z: 0}
+  m_LocalScale: {x: 3.2075872, y: 1.3039966, z: 0.8333}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3267541398007317475}

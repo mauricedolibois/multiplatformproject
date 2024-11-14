@@ -4419,6 +4419,10 @@ PrefabInstance:
       propertyPath: viewDirection.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6201505693743196494, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
+      propertyPath: detectionBoxRadius
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7203530538068800724, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
       propertyPath: m_Name
       value: Enemy Guard

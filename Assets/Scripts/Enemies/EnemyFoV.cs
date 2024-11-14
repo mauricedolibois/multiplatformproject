@@ -16,12 +16,13 @@ public class EnemyFoV : MonoBehaviour
     private Transform directionIndicator;
     private Transform detectionBox;
     [SerializeField] private float indicatorRadius = 1f;
+    [SerializeField] private float detectionBoxRadius = 0.2f;
 
     // Start is called before the first frame update
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player"); 
+        player = GameObject.FindGameObjectWithTag("Player");
         directionIndicator = transform.GetChild(0).transform;
         detectionBox = transform.GetChild(1).transform;
     }
@@ -96,13 +97,14 @@ public class EnemyFoV : MonoBehaviour
         }
         
         // Calculate the target position for the triangle based on movement direction
-        Vector3 targetPosition = transform.position + movementDirection;
+        Vector3 targetPosition = transform.position + movementDirection * detectionBoxRadius;
 
         // Update the triangle position and rotation to face the movement direction
         detectionBox.position = targetPosition;
         detectionBox.rotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
             
-        directionIndicator.position = targetPosition * indicatorRadius;
+        targetPosition = transform.position + movementDirection * indicatorRadius;
+        directionIndicator.position = targetPosition;
         directionIndicator.rotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
     }
 
