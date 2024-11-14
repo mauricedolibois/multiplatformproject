@@ -21,7 +21,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     private Transform directionIndicator;
     private SpriteRenderer spriteRenderer;
-    private GameObject melee;
+    private Transform melee;
     private float meleeOffset;
     [SerializeField] private float indicatorRadius = 1f;
 
@@ -40,7 +40,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         
         spriteRenderer = GetComponent<SpriteRenderer>();
         
-        melee = transform.GetChild(1).gameObject;
+        melee = transform.GetChild(1).gameObject.transform;
     }
 
     void Update()
@@ -78,6 +78,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         Vector3 targetPosition = transform.position + movementDirection * indicatorRadius;
 
         // Update the triangle position and rotation to face the movement direction
+        melee.position = targetPosition;
         directionIndicator.position = targetPosition;
         directionIndicator.rotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
     }

@@ -7958,11 +7958,11 @@ PrefabInstance:
     - target: {fileID: 7991964526689941716, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
       propertyPath: stateBehaviours.Array.data[0]
       value: 
-      objectReference: {fileID: 2069564479}
+      objectReference: {fileID: 2069564477}
     - target: {fileID: 7991964526689941716, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
       propertyPath: stateBehaviours.Array.data[1]
       value: 
-      objectReference: {fileID: 2069564477}
+      objectReference: {fileID: 2069564479}
     - target: {fileID: 8706681299374701883, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
       propertyPath: waypoints.Array.size
       value: 4

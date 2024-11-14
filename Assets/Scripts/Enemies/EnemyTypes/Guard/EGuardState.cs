@@ -4,5 +4,6 @@ public enum EGuardState
     Patrol = 0,
     Idle = 1,
     Suspicious = 2,
-    Alarmed = 3
+    Alarmed = 3,
+    CompanionIdle = 4
 }
