@@ -53,4 +53,9 @@ public class Item : MonoBehaviour
             }
         }
     }
+
+    void Update()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y + Mathf.Sin(Time.time*2) * 0.001f, transform.position.z);
+    }
 }
