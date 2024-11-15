@@ -13,7 +13,9 @@ public class PlayerSpawn : MonoBehaviour
         if (SceneManagement.Instance.SceneTransitionName == transitionName)
         {
             PlayerMovement.Instance.transform.position = transform.position;
+            PlayerMovement.Instance.transform.localScale = playerScale;
+            Camera camera = Camera.main;
+            camera.transform.position = new Vector3(transform.position.x, transform.position.y, camera.transform.position.z);
         }
-        PlayerMovement.Instance.transform.localScale = playerScale;
     }
 }
