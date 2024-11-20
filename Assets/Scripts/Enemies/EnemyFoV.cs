@@ -9,6 +9,13 @@ public class EnemyFoV : MonoBehaviour
     [SerializeField] private float fov = 30f;
     [SerializeField] private float viewDistance = 10f;
     [SerializeField] private Vector3 viewDirection; // Current direction navMeshAgent.destination - transform.position
+    
+    [SerializeField] private float suspicionFactor = 1f;
+
+    [SerializeField] private float raiseSuspicion=25f;
+    [SerializeField] private float raiseAlarmed = 75f;
+
+    [SerializeField] private float suspicionfall = 10f;
     private GameObject player;
     private NavMeshAgent navMeshAgent;
     public float suspicionLevel = 0f;
@@ -32,6 +39,10 @@ public class EnemyFoV : MonoBehaviour
         {
             viewDirection = GetDirection();
         }
+
+        if (suspicionLevel > 0){
+        suspicionLevel -= suspicionfall/suspicionLevel * Time.deltaTime;
+        }
         
         LookInDirection();
         DrawDebugLines();
@@ -53,10 +64,10 @@ public class EnemyFoV : MonoBehaviour
                         // If the player is directly being seen, Raises suspicion level
                         suspicionLevel = RaiseSuspicion(suspicionLevel);
                         Debug.Log($"This is the player and suspicion level is {suspicionLevel}"); 
-                        if (suspicionLevel >= 100f)
+                        if (suspicionLevel >= raiseAlarmed)
                         { 
                             return (int)EGuardState.Alarmed;
-                        } if (suspicionLevel >= 50f)
+                        } if (suspicionLevel >= raiseSuspicion)
                         {
                             return (int)EGuardState.Suspicious;
                         }
@@ -79,11 +90,11 @@ public class EnemyFoV : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, player.transform.position) > viewDistance / 2)
         {
-            return suspicion + 15 * Time.deltaTime;
+            return suspicion + 15*suspicionFactor * Time.deltaTime;
         }
         else
         {
-            return suspicion + 30 * Time.deltaTime;
+            return suspicion + 25*suspicionFactor * Time.deltaTime;
         }
     }
     
