@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - PlayerMelee
   - inv
+  - Security Camera
   layers:
   - Default
   - TransparentFX

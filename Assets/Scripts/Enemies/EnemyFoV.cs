@@ -21,10 +21,7 @@ public class EnemyFoV : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (GetComponent<NavMeshAgent>())
-        {
-            navMeshAgent = GetComponent<NavMeshAgent>();
-        }
+        navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         directionIndicator = transform.GetChild(0).transform;
         detectionBox = transform.GetChild(1).transform;
