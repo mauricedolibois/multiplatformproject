@@ -1312,37 +1312,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &932347443
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 932347444}
-  m_Layer: 0
-  m_Name: UpperRight
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &932347444
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932347443}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.07, y: 9.19, z: 0}
-  m_LocalScale: {x: 0.94107, y: 0.94107, z: 0.94107}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1252602585}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &933366058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,27 +1321,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 933366060}
-  - component: {fileID: 933366059}
   m_Layer: 0
-  m_Name: RoomManager
+  m_Name: Rooms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &933366059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 933366058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d1521d85eba8a40a12ce256b027dae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingRoom: {fileID: 1252602584}
 --- !u!4 &933366060
 Transform:
   m_ObjectHideFlags: 0
@@ -1831,7 +1786,7 @@ GameObject:
   - component: {fileID: 1252602585}
   - component: {fileID: 1252602584}
   - component: {fileID: 1252602586}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Room1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1852,8 +1807,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: 
   roomId: 0
-  lowerLeft: {fileID: 1735653437}
-  upperRight: {fileID: 932347444}
 --- !u!4 &1252602585
 Transform:
   m_ObjectHideFlags: 0
@@ -1866,9 +1819,7 @@ Transform:
   m_LocalPosition: {x: -9.45, y: -5.31, z: -0.16712144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1735653437}
-  - {fileID: 932347444}
+  m_Children: []
   m_Father: {fileID: 933366060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1252602586
@@ -1903,7 +1854,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.49394703, y: -0.08648491}
+  m_Offset: {x: -9.599621, y: 0.11554146}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1914,7 +1865,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 29.045275, y: 11.41864}
+  m_Size: {x: 15.047646, y: 17.99897}
   m_EdgeRadius: 0
 --- !u!1 &1259816944
 GameObject:
@@ -4792,37 +4743,6 @@ MonoBehaviour:
   m_Area: 0
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
---- !u!1 &1735653436
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1735653437}
-  m_Layer: 0
-  m_Name: LowerLeft
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1735653437
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1735653436}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.07, y: -8.87, z: 0}
-  m_LocalScale: {x: 0.94107, y: 0.94107, z: 0.94107}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1252602585}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

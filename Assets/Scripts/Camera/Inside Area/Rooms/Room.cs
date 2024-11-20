@@ -1,15 +1,20 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
 
 public class Room : MonoBehaviour
 {
-    public String roomName;
+    public string roomName;
     public int roomId;
-    [SerializeField] private Transform lowerLeft;
-    [SerializeField] private Transform upperRight;
 
-    public Transform LowerLeft => lowerLeft;
-    public Transform UpperRight => upperRight;
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // Get the bounds of the trigger
+            Bounds triggerBounds = GetComponent<Collider2D>().bounds;
 
+            // Call UpdateCameraBounds with the bounds' min and max values
+            Camera.main.GetComponent<InsideCamera>().UpdateCameraBounds(triggerBounds.min, triggerBounds.max);
+        }
+    }
 }
