@@ -3448,18 +3448,6 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6201505693743196494, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
-      propertyPath: fov
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6201505693743196494, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
-      propertyPath: viewDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6201505693743196494, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
-      propertyPath: viewDirection.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7203530538068800724, guid: 7a595755e69d676428214bfabe9edc74, type: 3}
       propertyPath: m_Name
       value: Enemy Guard
@@ -4604,6 +4592,10 @@ MonoBehaviour:
   fov: 30
   viewDistance: 10
   viewDirection: {x: 0, y: 1, z: 0}
+  suspicionFactor: 1
+  raiseSuspicion: 25
+  raiseAlarmed: 75
+  suspicionfall: 0.5
   suspicionLevel: 0
   indicatorRadius: 1
   detectionBoxRadius: 0.2
