@@ -723,7 +723,7 @@ MonoBehaviour:
   suspicionFactor: 1.5
   raiseSuspicion: 15
   raiseAlarmed: 75
-  suspicionfall: 0.5
+  suspicionFall: 10
   suspicionLevel: 0
   indicatorRadius: 1
   detectionBoxRadius: 0.2
