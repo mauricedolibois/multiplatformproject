@@ -135,4 +135,9 @@ public class PlayerMovement : Singleton<PlayerMovement>
             transform.gameObject.layer = LayerMask.NameToLayer("Player");
         }
     }
+    
+    public void SetMovementAllowed(bool allowed)
+    {
+        isMovementAllowed = allowed;
+    }
 }

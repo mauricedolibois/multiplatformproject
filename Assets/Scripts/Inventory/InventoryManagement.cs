@@ -21,6 +21,8 @@ public class InventoryManagement : Singleton<InventoryManagement>
         {
             menuActivated = !menuActivated;
             InventoryMenu.SetActive(menuActivated);
+            
+            PlayerMovement.Instance.SetMovementAllowed(!menuActivated); 
         }
     }
 
