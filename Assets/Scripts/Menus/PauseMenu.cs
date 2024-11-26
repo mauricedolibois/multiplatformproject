@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu :MonoBehaviour
 {
     public GameObject PauseMenuu;
     private bool menuActivated = false;
@@ -20,8 +20,16 @@ public class PauseMenu : MonoBehaviour
         {
             menuActivated = !menuActivated;
             PauseMenuu.SetActive(menuActivated);
-            
-            PlayerMovement.Instance.SetMovementAllowed(!menuActivated); 
+        }
+
+        //freeze
+        if (menuActivated)
+        {
+            Time.timeScale = 0;
+        }
+        else if (!menuActivated)
+        {
+            Time.timeScale = 1;
         }
     }
 

@@ -459,7 +459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7880133012222941725, guid: 932f3d6b6f95d084986b8b403e00843f, type: 3}
       propertyPath: transitionName
-      value: WEntry
+      value: BEntry
       objectReference: {fileID: 0}
     - target: {fileID: 8672363057412095061, guid: 932f3d6b6f95d084986b8b403e00843f, type: 3}
       propertyPath: m_LocalPosition.x

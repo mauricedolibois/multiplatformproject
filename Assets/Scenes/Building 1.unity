@@ -8803,7 +8803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1454691391093243495, guid: 08411cf9077529b4cbeba6765bf53458, type: 3}
       propertyPath: sceneTransitionName
-      value: WEntry
+      value: BEntry
       objectReference: {fileID: 0}
     - target: {fileID: 2184497669502523273, guid: 08411cf9077529b4cbeba6765bf53458, type: 3}
       propertyPath: m_Name

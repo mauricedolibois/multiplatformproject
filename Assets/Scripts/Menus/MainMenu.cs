@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
    public void Newgame()
    {
       SceneManager.LoadScene(1);
+      //GameObject.FindGameObjectWithTag("Player").transform.position = new Vector3(180, 1.38f, 175);
    }
 
    public void Quitgame()
@@ -15,3 +16,4 @@ public class MainMenu : MonoBehaviour
       Application.Quit();
    }
 }
+
