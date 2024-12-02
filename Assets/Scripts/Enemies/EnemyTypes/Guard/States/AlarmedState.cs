@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class AlarmedState : AStateBehaviour
 {
+    
     public override bool InitializeState()
     {
         return true;
@@ -12,6 +15,9 @@ public class AlarmedState : AStateBehaviour
         Debug.Log("ALARMED");
         EnemySignToggle signToggle = GetComponent<EnemySignToggle>();
         signToggle.ShowExclamationMark();
+        
+        PlayerMovement.Instance.SetMovementAllowed(false);
+        StartCoroutine(WaitAndLoadScene(2f));
     }
 
     public override void OnStateUpdate()
@@ -27,5 +33,14 @@ public class AlarmedState : AStateBehaviour
     public override int StateTransitionCondition()
     {
         return (int)EGuardState.Invalid; // Default: no transition
+    }
+    
+    private IEnumerator WaitAndLoadScene(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(2);
+        Destroy(GameObject.FindGameObjectWithTag("Player"));
+        Destroy(GameObject.FindGameObjectWithTag("inv"));
+        Time.timeScale = 1;
     }
 }
