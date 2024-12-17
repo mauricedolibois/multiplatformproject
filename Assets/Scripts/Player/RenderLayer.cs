@@ -7,19 +7,19 @@ public class RenderBackWall : MonoBehaviour
     private GameObject player;
     private SpriteRenderer spriteRenderer;
 
-    private BoxCollider2D collider;
+    private BoxCollider2D boxCollider;
 
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         spriteRenderer = GetComponent<SpriteRenderer>();
-        collider = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update()
     {
-        if (player.transform.position.y < collider.bounds.min.y)
+        if (player.transform.position.y < boxCollider.bounds.min.y)
         {
             spriteRenderer.sortingOrder = -2;
         }
