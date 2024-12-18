@@ -5,13 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class GameOverMenu : MonoBehaviour
 {
-    public void Newgame()
+    public void Continue()
     {
+        GameObject.FindGameObjectWithTag("inv").GetComponent<InventoryManagement>().inventoryBlock = false;
         SceneManager.LoadScene(1);
     }
     
     public void MainMenu()
     {
+        Destroy(GameObject.FindGameObjectWithTag("inv"));
         SceneManager.LoadScene(0);
     }
 }

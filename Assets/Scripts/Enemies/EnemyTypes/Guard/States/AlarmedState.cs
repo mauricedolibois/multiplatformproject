@@ -40,7 +40,9 @@ public class AlarmedState : AStateBehaviour
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(2);
         Destroy(GameObject.FindGameObjectWithTag("Player"));
-        Destroy(GameObject.FindGameObjectWithTag("inv"));
+        GameObject inventory = GameObject.FindGameObjectWithTag("inv");
+        inventory.GetComponent<InventoryManagement>().inventoryBlock = true;
+        inventory.transform.GetChild(0).gameObject.SetActive(false);
         Time.timeScale = 1;
     }
 }
