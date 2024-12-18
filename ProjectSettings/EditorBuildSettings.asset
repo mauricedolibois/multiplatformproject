@@ -15,9 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Game Over Menu.unity
     guid: 5118d78a6aa7a0042b8f22004240f9f6
   - enabled: 1
+    path: Assets/Scenes/End Screen.unity
+    guid: cb038eb04721e5648aa9924a2b01e86a
+  - enabled: 1
     path: Assets/Scenes/DEMO/Outside.unity
     guid: 1ee8391a204e4a145bedaae4cbd9503e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Building 1.unity
     guid: b3560eeb9e3f75f4f973b4c0f696915b
   - enabled: 1
