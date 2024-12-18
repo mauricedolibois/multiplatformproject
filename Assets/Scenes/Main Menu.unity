@@ -289,6 +289,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2065587023677215789, guid: 0e1aaa58ca762384fa940d053c85bdb3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 714840706}
+    - targetCorrespondingSourceObject: {fileID: 2065587023677215789, guid: 0e1aaa58ca762384fa940d053c85bdb3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 714840707}
   m_SourcePrefab: {fileID: 100100000, guid: 0e1aaa58ca762384fa940d053c85bdb3, type: 3}
 --- !u!1 &270337902
 GameObject:
@@ -682,6 +685,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectButton: {fileID: 1657888411}
   gameCodeText: {fileID: 1477724119}
+--- !u!114 &714840707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714840705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705128179d39061488f129742237a2f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newGameButton: {fileID: 1006342082}
 --- !u!1 &777316826
 GameObject:
   m_ObjectHideFlags: 0
