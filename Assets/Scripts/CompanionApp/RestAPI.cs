@@ -199,7 +199,6 @@ public IEnumerator CheckInput(System.Action<bool> callback)
             }
             else
             {
-                Debug.LogError("Failed to parse response as boolean.");
                 callback(false);
             }
         }
