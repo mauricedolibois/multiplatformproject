@@ -98,4 +98,73 @@ public class RestAPI : MonoBehaviour
     }
 }
 
+// Function to update the current room
+    public IEnumerator UpdateCurrentRoom(int roomId, System.Action<bool> callback)
+    {
+        int sessionId = PlayerPrefs.GetInt("SessionID", -1);
+
+        if (sessionId == -1)
+        {
+            Debug.LogError("No SessionID found in PlayerPrefs.");
+            callback(false);
+            yield break;
+        }
+
+        string url = $"{apiUrl}/room/changeCurrentRoom/{sessionId}/{roomId}";
+
+        using (UnityWebRequest request = UnityWebRequest.Put(url, ""))
+        {
+            request.SetRequestHeader("Content-Type", "application/json");
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError("Error: " + request.error);
+                callback(false);
+            }
+            else
+            {
+                Debug.Log("Room updated successfully.");
+                callback(true);
+            }
+        }
+    }
+
+
+    // Function to get frequency for a specific room
+   public IEnumerator GetFrequency(int roomId, System.Action<string> callback)
+{
+    int sessionId = PlayerPrefs.GetInt("SessionID", -1);
+
+    if (sessionId == -1)
+    {
+        Debug.LogError("No SessionID found in PlayerPrefs.");
+        callback(null);
+        yield break;
+    }
+
+    string url = $"{apiUrl}/frequency/getFrequency/{sessionId}/{roomId}";
+    Debug.Log($"Requesting URL: {url}");
+
+    using (UnityWebRequest request = UnityWebRequest.Get(url))
+    {
+        request.SetRequestHeader("Content-Type", "application/json");
+        request.timeout = 10; // Timeout set to 10 seconds
+
+        Debug.Log("Sending request...");
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.LogError($"Request failed with error: {request.error}");
+            callback(null);
+        }
+        else
+        {
+            string frequency = request.downloadHandler.text;
+            Debug.Log($"Frequency received: {frequency}");
+            callback(frequency);
+        }
+    }
+}
 }
