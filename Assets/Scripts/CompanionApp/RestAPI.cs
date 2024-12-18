@@ -29,7 +29,6 @@ public class RestAPI : MonoBehaviour
             else
             {
                 string jsonResponse = request.downloadHandler.text;
-                Debug.Log("Response: " + jsonResponse);
 
                 SessionModel sessionData = JsonUtility.FromJson<SessionModel>(jsonResponse);
 
@@ -124,7 +123,6 @@ public class RestAPI : MonoBehaviour
             }
             else
             {
-                Debug.Log("Room updated successfully.");
                 callback(true);
             }
         }
@@ -144,14 +142,12 @@ public class RestAPI : MonoBehaviour
     }
 
     string url = $"{apiUrl}/frequency/getFrequency/{sessionId}/{roomId}";
-    Debug.Log($"Requesting URL: {url}");
 
     using (UnityWebRequest request = UnityWebRequest.Get(url))
     {
         request.SetRequestHeader("Content-Type", "application/json");
         request.timeout = 10; // Timeout set to 10 seconds
 
-        Debug.Log("Sending request...");
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
@@ -162,9 +158,53 @@ public class RestAPI : MonoBehaviour
         else
         {
             string frequency = request.downloadHandler.text;
-            Debug.Log($"Frequency received: {frequency}");
             callback(frequency);
         }
     }
 }
+
+public IEnumerator CheckInput(System.Action<bool> callback)
+{
+    int sessionId = PlayerPrefs.GetInt("SessionID", -1);
+
+    if (sessionId == -1)
+    {
+        Debug.LogError("Invalid SessionID provided.");
+        callback(false);
+        yield break;
+    }
+
+    string url = $"{apiUrl}/input/checkInput/{sessionId}";
+
+    using (UnityWebRequest request = UnityWebRequest.Get(url))
+    {
+        request.SetRequestHeader("Content-Type", "application/json");
+        request.timeout = 10; // Timeout set to 10 seconds
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.LogError($"Request failed with error: {request.error}");
+            callback(false);
+        }
+        else
+        {
+            string responseText = request.downloadHandler.text;
+
+            bool result;
+            if (bool.TryParse(responseText, out result))
+            {
+                callback(result);
+            }
+            else
+            {
+                Debug.LogError("Failed to parse response as boolean.");
+                callback(false);
+            }
+        }
+    }
+}
+
+
 }
