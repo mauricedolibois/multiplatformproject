@@ -205,5 +205,33 @@ public IEnumerator CheckInput(System.Action<bool> callback)
     }
 }
 
+public IEnumerator ResetGame() 
+    {
+        // Get SessionID from PlayerPrefs
+        int storedSessionId = PlayerPrefs.GetInt("SessionID", -1);
+
+        if (storedSessionId == -1)
+        {
+            Debug.LogError("No SessionID found in PlayerPrefs.");
+            yield break;
+        }
+
+        string url = $"{apiUrl}/game/resetCurrentSession/{storedSessionId}";
+        
+        using (UnityWebRequest request = UnityWebRequest.Put(url, ""))
+        {
+            request.SetRequestHeader("Content-Type", "application/json"); // Optional: for clarity
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError("Error: " + request.error);
+            }
+            else
+            {
+                Debug.Log("Reset all Inputs");
+            }
+        }
+    }
 
 }
