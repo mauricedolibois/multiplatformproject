@@ -9,7 +9,8 @@ public class InventoryManagement : Singleton<InventoryManagement>
     public GameObject InventoryMenu;
     private bool menuActivated = false;
     public ItemSlot[] itemSlot;
-   
+    public bool inventoryBlock = false;
+    
     void Start()
     {
         InventoryMenu.SetActive(menuActivated);
@@ -17,7 +18,7 @@ public class InventoryManagement : Singleton<InventoryManagement>
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I) && inventoryBlock == false)
         {
             menuActivated = !menuActivated;
             InventoryMenu.SetActive(menuActivated);
