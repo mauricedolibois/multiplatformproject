@@ -37,7 +37,7 @@ public class Room : MonoBehaviour
 
             Camera.main.GetComponent<InsideCamera>().UpdateCameraBounds(triggerBounds.min, triggerBounds.max);
 
-            if (roomId!=0)
+            if (roomId > 0)
             {
                 StartCoroutine(restAPI.UpdateCurrentRoom(roomId, success =>
                 {
