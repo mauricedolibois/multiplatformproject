@@ -4,6 +4,8 @@ using UnityEngine.Networking;
 
 public class RestAPI : MonoBehaviour
 {
+
+    //private const string apiUrl = "http://localhost:3000";	
     private const string apiUrl = "https://operationsilentchaos.vercel.app";
 
     // only for testing
