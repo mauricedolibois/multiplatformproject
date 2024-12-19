@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/DEMO/Building 2.unity
     guid: 44213249c521af244a2a39962379c453
   - enabled: 1
-    path: Assets/Scenes/Buildings/CompanionApp Building.unity
+    path: Assets/Scenes/DEMO/CompanionApp Building.unity
     guid: 5cfda84f4f42ede489d6355fef6c8e59
   - enabled: 1
     path: Assets/Scenes/Buildings/Lab.unity

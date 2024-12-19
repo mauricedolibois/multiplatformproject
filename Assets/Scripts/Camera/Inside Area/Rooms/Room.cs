@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 public class Room : MonoBehaviour
 {
     public string roomName;
-    public RestAPI restAPI;
+    private RestAPI restAPI;
     public int roomId;
 
     private TextMeshProUGUI areaText;
