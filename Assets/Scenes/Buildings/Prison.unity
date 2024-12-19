@@ -574,11 +574,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 864591122656859426, guid: dea7683c2acd2704cac5a3eff7884126, type: 3}
       propertyPath: roomId
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 864591122656859426, guid: dea7683c2acd2704cac5a3eff7884126, type: 3}
       propertyPath: roomName
-      value: A1
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1463460545210696701, guid: dea7683c2acd2704cac5a3eff7884126, type: 3}
       propertyPath: m_Name
@@ -23864,11 +23864,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 864591122656859426, guid: dea7683c2acd2704cac5a3eff7884126, type: 3}
       propertyPath: roomId
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 864591122656859426, guid: dea7683c2acd2704cac5a3eff7884126, type: 3}
       propertyPath: roomName
-      value: A1
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1463460545210696701, guid: dea7683c2acd2704cac5a3eff7884126, type: 3}
       propertyPath: m_Name
