@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 
 public class Room : MonoBehaviour
 {
@@ -9,8 +11,12 @@ public class Room : MonoBehaviour
     public RestAPI restAPI;
     public int roomId;
 
+    private TextMeshProUGUI areaText;
+
     void Start()
     {
+        areaText = GameObject.FindGameObjectWithTag("Area").GetComponent<TextMeshProUGUI>();
+
         GameObject restAPIManager = GameObject.Find("RestAPIManager");
         if (restAPIManager != null)
         {
@@ -26,6 +32,7 @@ public class Room : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+
             Bounds triggerBounds = GetComponent<Collider2D>().bounds;
 
             Camera.main.GetComponent<InsideCamera>().UpdateCameraBounds(triggerBounds.min, triggerBounds.max);
@@ -34,6 +41,7 @@ public class Room : MonoBehaviour
             {
                 StartCoroutine(restAPI.UpdateCurrentRoom(roomId, success =>
                 {
+                    areaText.text = roomName;
                     if (success)
                     {
                         Debug.Log("Room updated successfully.");

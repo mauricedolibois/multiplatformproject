@@ -8,6 +8,7 @@ TagManager:
   - PlayerMelee
   - inv
   - Security Camera
+  - Area
   layers:
   - Default
   - TransparentFX
