@@ -9,6 +9,7 @@ TagManager:
   - inv
   - Security Camera
   - Area
+  - SceneM
   layers:
   - Default
   - TransparentFX
