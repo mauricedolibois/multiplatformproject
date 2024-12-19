@@ -35,13 +35,19 @@ public class Room : MonoBehaviour
 
             Bounds triggerBounds = GetComponent<Collider2D>().bounds;
 
-            Camera.main.GetComponent<InsideCamera>().UpdateCameraBounds(triggerBounds.min, triggerBounds.max);
+            InsideCamera insideCamera = Camera.main.GetComponent<InsideCamera>();
+            if (insideCamera != null)
+            {
+                insideCamera.UpdateCameraBounds(triggerBounds.min, triggerBounds.max);
+            }
+            
 
             if (roomId > 0)
             {
+                areaText.text = roomName;
+
                 StartCoroutine(restAPI.UpdateCurrentRoom(roomId, success =>
                 {
-                    areaText.text = roomName;
                     if (success)
                     {
                         Debug.Log("Room updated successfully.");
