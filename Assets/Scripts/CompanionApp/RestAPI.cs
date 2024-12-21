@@ -194,15 +194,8 @@ public IEnumerator CheckInput(System.Action<bool> callback)
         {
             string responseText = request.downloadHandler.text;
 
-            bool result;
-            if (bool.TryParse(responseText, out result))
-            {
-                callback(result);
-            }
-            else
-            {
-                callback(false);
-            }
+            bool result = responseText == "1";
+            callback(result);
         }
     }
 }

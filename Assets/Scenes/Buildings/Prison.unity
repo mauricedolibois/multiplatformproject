@@ -273,6 +273,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Security Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 6541497253871011265, guid: 3bd232f31547a3f4abcdcfee881bd4c1, type: 3}
+      propertyPath: suspicionFactor
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8103439146871545333, guid: 3bd232f31547a3f4abcdcfee881bd4c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -28.52
@@ -893,6 +897,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6633863344431451036, guid: dea7683c2acd2704cac5a3eff7884126, type: 3}
   m_PrefabInstance: {fileID: 6671677543724031106}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &720004502
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7816863383971309689, guid: fda68ea13c4968146b2bb547b70a98ac, type: 3}
+      propertyPath: m_Name
+      value: Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 8527498686530630670, guid: fda68ea13c4968146b2bb547b70a98ac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -25.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 8527498686530630670, guid: fda68ea13c4968146b2bb547b70a98ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 8527498686530630670, guid: fda68ea13c4968146b2bb547b70a98ac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8527498686530630670, guid: fda68ea13c4968146b2bb547b70a98ac, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8527498686530630670, guid: fda68ea13c4968146b2bb547b70a98ac, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8527498686530630670, guid: fda68ea13c4968146b2bb547b70a98ac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8527498686530630670, guid: fda68ea13c4968146b2bb547b70a98ac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8527498686530630670, guid: fda68ea13c4968146b2bb547b70a98ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8527498686530630670, guid: fda68ea13c4968146b2bb547b70a98ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8527498686530630670, guid: fda68ea13c4968146b2bb547b70a98ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fda68ea13c4968146b2bb547b70a98ac, type: 3}
 --- !u!1 &725314712
 GameObject:
   m_ObjectHideFlags: 0
@@ -24394,6 +24455,10 @@ PrefabInstance:
       propertyPath: roomID
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8153677957264320352, guid: 2c00286d8519f06408224a8ba1a9f1ff, type: 3}
+      propertyPath: m_Text
+      value: " <color=#303030>Prison:</color> \n"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24418,3 +24483,4 @@ SceneRoots:
   - {fileID: 652539331}
   - {fileID: 206580013}
   - {fileID: 1802529787}
+  - {fileID: 720004502}
