@@ -31,6 +31,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
     private Vector2 movement;
     private bool isMovementAllowed = true;
 
+    private Animator animator;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -42,6 +44,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
         melee = transform.GetChild(1).gameObject.transform;
 
         immune = false;
+
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -49,6 +53,22 @@ public class PlayerMovement : Singleton<PlayerMovement>
         HandleInput();
         SpeedCheat();
         PlayerImmune();
+        if (isMovementAllowed)
+        {
+            animator.SetBool("movement_allowed", true);
+            animator.SetBool("run_right", movement.x > 0);
+            animator.SetBool("run_left", movement.x < 0);
+            animator.SetBool("run_up", movement.y > 0);
+            animator.SetBool("run_down", movement.y < 0);
+        }
+        else
+        {
+            animator.SetBool("run_right", false);
+            animator.SetBool("run_left", false);
+            animator.SetBool("run_up", false);
+            animator.SetBool("run_down", false);
+            animator.SetBool("movement_allowed", false);
+        }
     }
 
     void FixedUpdate()

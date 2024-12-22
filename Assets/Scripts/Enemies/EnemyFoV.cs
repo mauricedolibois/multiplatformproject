@@ -140,8 +140,7 @@ public class EnemyFoV : MonoBehaviour
             
         targetPosition = transform.position + movementDirection * indicatorRadius;
         directionIndicator.position = targetPosition;
-        directionIndicator.rotation = Quaternion.LookRotation(Vector3.forward, movementDirection);
-    }
+        directionIndicator.rotation = Quaternion.LookRotation(Vector3.forward, movementDirection); }
 
     private void DrawDebugLines()
     {

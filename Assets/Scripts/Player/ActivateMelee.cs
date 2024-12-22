@@ -5,6 +5,7 @@ using UnityEngine;
 public class ActivateMelee : MonoBehaviour
 {
     private GameObject melee;
+    [SerializeField] GameObject directionIndicator;
     private float maxTime = 1f;
     private float timer = 0f;
     // Start is called before the first frame update
@@ -12,6 +13,7 @@ public class ActivateMelee : MonoBehaviour
     {
         melee = transform.GetChild(1).gameObject;
         melee.SetActive(false);
+        directionIndicator.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     // Update is called once per frame
@@ -28,6 +30,7 @@ public class ActivateMelee : MonoBehaviour
         }
         else
         {   
+            directionIndicator.GetComponent<SpriteRenderer>().color = Color.white;
             melee.SetActive(false);
         }
     }
@@ -38,6 +41,7 @@ public class ActivateMelee : MonoBehaviour
         {
             timer = 0f;
             melee.SetActive(true);
+            directionIndicator.GetComponent<SpriteRenderer>().color = Color.red;
         }
     }
 }

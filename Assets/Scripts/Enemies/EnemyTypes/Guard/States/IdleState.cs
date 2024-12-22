@@ -7,6 +7,8 @@ public class IdleState : AStateBehaviour
     private float idleTimer = 0f;
 
     private EnemyFoV fov;
+
+    private Animator animator;
     private ImmediateDetection detection;
 
 
@@ -18,6 +20,11 @@ public class IdleState : AStateBehaviour
     public override void OnStateStart()
     {
         Debug.Log("IDLE");
+        animator = GetComponent<Animator>();
+        animator.SetBool("run_right", false);
+        animator.SetBool("run_left", false);
+        animator.SetBool("run_up", false);
+        animator.SetBool("run_down", false);
         fov = GetComponent<EnemyFoV>();
         detection = GetComponentInChildren<ImmediateDetection>();
         detection.detected = false;

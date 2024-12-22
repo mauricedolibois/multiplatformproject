@@ -7,6 +7,7 @@ public class PatrolState : AStateBehaviour
     [SerializeField] private Transform[] waypoints;
     private NavMeshAgent navMeshAgent;
 
+    private Animator animator;
     private EnemyFoV fov;
     private ImmediateDetection detection;
 
@@ -26,6 +27,7 @@ public class PatrolState : AStateBehaviour
     public override void OnStateStart()
     {
         Debug.Log("PATROL");
+        animator = GetComponent<Animator>();
         fov = GetComponent<EnemyFoV>();
         detection = GetComponentInChildren<ImmediateDetection>();
         detection.detected = false;
@@ -36,6 +38,26 @@ public class PatrolState : AStateBehaviour
 
     public override void OnStateUpdate()
     {
+        Vector3 tmp_nav = navMeshAgent.velocity;
+
+        if (tmp_nav.magnitude > 0.1f) // Threshold to ignore very small movements
+        {
+            Vector3 normalizedVelocity = tmp_nav.normalized;
+
+            animator.SetBool("run_up", normalizedVelocity.y > 0.5f);
+            animator.SetBool("run_down", normalizedVelocity.y < -0.5f);
+            animator.SetBool("run_right", normalizedVelocity.x > 0.5f);
+            animator.SetBool("run_left", normalizedVelocity.x < -0.5f);
+        }
+        else
+        {
+            // Reset all movement animations when there is no significant velocity
+            animator.SetBool("run_up", false);
+            animator.SetBool("run_down", false);
+            animator.SetBool("run_right", false);
+            animator.SetBool("run_left", false);
+        }
+
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.1f)
         {
             // 50% chance to switch to Idle state

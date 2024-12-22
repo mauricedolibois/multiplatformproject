@@ -4,6 +4,8 @@ public class CompanionIdle : AStateBehaviour
 {
     private EnemyFoV fov;
     private ImmediateDetection detection;
+
+    private Animator animator;
     
     public override bool InitializeState()
     {
@@ -13,6 +15,11 @@ public class CompanionIdle : AStateBehaviour
     public override void OnStateStart()
     {
         Debug.Log("COMPANION IDLE");
+        animator = GetComponent<Animator>();
+        animator.SetBool("run_right", false);
+        animator.SetBool("run_left", false);
+        animator.SetBool("run_up", false);
+        animator.SetBool("run_down", false);
         fov = GetComponent<EnemyFoV>();
         detection = GetComponentInChildren<ImmediateDetection>();
         detection.detected = false;

@@ -5,6 +5,8 @@ using System.Collections;
 public class AlarmedState : AStateBehaviour
 {
     
+    private Animator animator;
+
     public override bool InitializeState()
     {
         return true;
@@ -13,6 +15,11 @@ public class AlarmedState : AStateBehaviour
     public override void OnStateStart()
     {
         Debug.Log("ALARMED");
+        animator = GetComponent<Animator>();
+        animator.SetBool("run_right", false);
+        animator.SetBool("run_left", false);
+        animator.SetBool("run_up", false);
+        animator.SetBool("run_down", false);
         EnemySignToggle signToggle = GetComponent<EnemySignToggle>();
         signToggle.ShowExclamationMark();
         

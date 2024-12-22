@@ -7,6 +7,8 @@ public class SuspiciousState : AStateBehaviour
     private NavMeshAgent navMeshAgent;
 
     private EnemyFoV fov;
+
+    private Animator animator;
     private ImmediateDetection detection;
 
 
@@ -27,6 +29,7 @@ public class SuspiciousState : AStateBehaviour
     public override void OnStateStart()
     {
         Debug.Log("SUSPICIOUS");
+        animator = GetComponent<Animator>();
         fov = GetComponent<EnemyFoV>();
         detection = GetComponentInChildren<ImmediateDetection>();
         detection.detected = false;
@@ -36,7 +39,27 @@ public class SuspiciousState : AStateBehaviour
     }
 
     public override void OnStateUpdate()
-    {
+    {       
+        Vector3 tmp_nav = navMeshAgent.velocity;
+
+        if (tmp_nav.magnitude > 0.1f) // Threshold to ignore very small movements
+        {
+            Vector3 normalizedVelocity = tmp_nav.normalized;
+
+            animator.SetBool("run_up", normalizedVelocity.y > 0.5f);
+            animator.SetBool("run_down", normalizedVelocity.y < -0.5f);
+            animator.SetBool("run_right", normalizedVelocity.x > 0.5f);
+            animator.SetBool("run_left", normalizedVelocity.x < -0.5f);
+        }
+        else
+        {
+            // Reset all movement animations when there is no significant velocity
+            animator.SetBool("run_up", false);
+            animator.SetBool("run_down", false);
+            animator.SetBool("run_right", false);
+            animator.SetBool("run_left", false);
+        }
+
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.1f)
         {
             AssociatedStateMachine.SetState((int)EGuardState.Idle);
