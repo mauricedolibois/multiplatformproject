@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class CompanionIdle : AStateBehaviour
@@ -5,6 +7,8 @@ public class CompanionIdle : AStateBehaviour
     private EnemyFoV fov;
     private ImmediateDetection detection;
 
+    private RestAPI restAPI;
+    private bool isCheckingInput;
     private Animator animator;
     
     public override bool InitializeState()
@@ -25,14 +29,12 @@ public class CompanionIdle : AStateBehaviour
         detection.detected = false;
         EnemySignToggle signToggle = GetComponent<EnemySignToggle>();
         signToggle.HideSigns();
+
+        StartCoroutine(CheckInputPeriodically());
     }
 
     public override void OnStateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            AssociatedStateMachine.SetState((int)EGuardState.Patrol);
-        }
     }
 
     public override void OnStateEnd()
@@ -52,12 +54,24 @@ public class CompanionIdle : AStateBehaviour
         return (int)EGuardState.Invalid;
     }
     
-    // private float lowerSuspicion(float suspicion)
-    // {
-    //     if (suspicion > 0f)
-    //     {
-    //         return suspicion - 15 * Time.deltaTime;
-    //     }
-    //     return suspicion;
-    // }
+    private IEnumerator CheckInputPeriodically()
+    {
+        while (isCheckingInput)
+        {
+            if (restAPI != null)
+            {
+                // Call CheckInput method and handle the response
+                yield return StartCoroutine(restAPI.CheckInput(result =>
+                {
+                    if (result)
+                    {
+                        AssociatedStateMachine.SetState((int)EGuardState.Patrol);
+                        isCheckingInput = false;
+                    }
+                }));
+            }
+
+            yield return new WaitForSeconds(2f); 
+        }
+    }
 }

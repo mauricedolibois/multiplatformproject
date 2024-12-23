@@ -151,7 +151,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         } else if (Input.GetKeyDown(KeyCode.K) && immune)
         {
             immune = false;
-            spriteRenderer.color = new Color(0.3841506f, 0.7295597f, 0.3693682f, 1f);
+            spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
             transform.gameObject.layer = LayerMask.NameToLayer("Player");
         }
     }
