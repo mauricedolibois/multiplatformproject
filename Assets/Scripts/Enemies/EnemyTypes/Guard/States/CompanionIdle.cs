@@ -18,6 +18,16 @@ public class CompanionIdle : AStateBehaviour
 
     public override void OnStateStart()
     {
+        GameObject restAPIManager = GameObject.Find("RestAPIManager");
+        if (restAPIManager != null)
+        {
+            restAPI = restAPIManager.GetComponent<RestAPI>();
+        }
+        else
+        {
+            Debug.LogError("RestAPIManager not found in the scene!");
+        }
+        
         Debug.Log("COMPANION IDLE");
         animator = GetComponent<Animator>();
         animator.SetBool("run_right", false);
@@ -29,6 +39,8 @@ public class CompanionIdle : AStateBehaviour
         detection.detected = false;
         EnemySignToggle signToggle = GetComponent<EnemySignToggle>();
         signToggle.HideSigns();
+        
+        isCheckingInput = true;
 
         StartCoroutine(CheckInputPeriodically());
     }
@@ -56,6 +68,7 @@ public class CompanionIdle : AStateBehaviour
     
     private IEnumerator CheckInputPeriodically()
     {
+        
         while (isCheckingInput)
         {
             if (restAPI != null)
@@ -65,8 +78,8 @@ public class CompanionIdle : AStateBehaviour
                 {
                     if (result)
                     {
-                        AssociatedStateMachine.SetState((int)EGuardState.Patrol);
                         isCheckingInput = false;
+                        AssociatedStateMachine.SetState((int)EGuardState.Patrol);
                     }
                 }));
             }
