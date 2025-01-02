@@ -5,8 +5,8 @@ using UnityEngine.Networking;
 public class RestAPI : MonoBehaviour
 {
 
-    private const string apiUrl = "http://localhost:3000";	
-    //private const string apiUrl = "https://operationsilentchaos.vercel.app";
+    //private const string apiUrl = "http://localhost:3000";	
+    private const string apiUrl = "https://operationsilentchaos.vercel.app";
 
     // only for testing
     public void CreateSession()
@@ -98,7 +98,47 @@ public class RestAPI : MonoBehaviour
         }
     }
 }
+// Function to get the current room
+    public IEnumerator GetCurrentRoom(System.Action<int> callback)
+    {
+        int sessionId = PlayerPrefs.GetInt("SessionID", -1);
 
+        if (sessionId == -1)
+        {
+            Debug.LogError("No SessionID found in PlayerPrefs.");
+            callback(0);
+            yield break;
+        }
+        
+        string url = $"{apiUrl}/room/getCurrentRoom/{sessionId}";
+
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        {
+            request.SetRequestHeader("Content-Type", "application/json");
+            request.timeout = 10; // Timeout set to 10 seconds
+
+            yield return request.SendWebRequest();
+
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError($"Request failed with error: {request.error}");
+                callback(0);
+            }
+            else
+            {
+                string jsonResponse = request.downloadHandler.text;
+
+                RoomModel roomData = JsonUtility.FromJson<RoomModel>(jsonResponse);
+
+                
+                if (roomData != null)
+                {
+                    callback(roomData.roomId);
+                }
+            }
+        }
+    }
+   
 // Function to update the current room
     public IEnumerator UpdateCurrentRoom(int roomId, System.Action<bool> callback)
     {

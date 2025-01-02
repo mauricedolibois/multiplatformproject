@@ -5,7 +5,7 @@ using System.Collections;
 public class ConnectApp : MonoBehaviour
 {
     [SerializeField] public Button connectButton;   
-        [SerializeField] public Text gameCodeText;      
+    [SerializeField] public Text gameCodeText;  
     private RestAPI restAPI;                      
 
     void Start()

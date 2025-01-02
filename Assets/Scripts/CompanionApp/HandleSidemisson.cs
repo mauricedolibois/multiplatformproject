@@ -43,13 +43,20 @@ public class HandleSidemission : MonoBehaviour
         {
             if (restAPI != null)
             {
-                // Call CheckInput method and handle the response
-                yield return StartCoroutine(restAPI.CheckInput(result =>
+
+                yield return StartCoroutine(restAPI.GetCurrentRoom(id =>
                 {
-                    if (result)
+                    if (id == 6)
                     {
-                        TriggerSideMission();
-                        isCheckingInput = false;
+                        // Call CheckInput method and handle the response
+                        StartCoroutine(restAPI.CheckInput(result =>
+                        {
+                            if (result)
+                            {
+                                TriggerSideMission();
+                                isCheckingInput = false;
+                            }
+                        }));
                     }
                 }));
             }
