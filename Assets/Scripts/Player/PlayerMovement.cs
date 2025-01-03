@@ -15,6 +15,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     }
 
     [SerializeField] private float moveSpeed = 1.0f;
+    private float originalSpeed;
 
     private bool immune;
 
@@ -35,6 +36,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     void Start()
     {
+        originalSpeed = moveSpeed;
+        
         rb = GetComponent<Rigidbody2D>();
 
         directionIndicator = transform.GetChild(0).transform;
@@ -139,6 +142,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
         {
             moveSpeed -= 0.1f;
         }
+
+        if (Input.GetKey(KeyCode.Alpha0))
+        {
+            moveSpeed = originalSpeed;
+        }
     }
 
     private void PlayerImmune()
@@ -159,5 +167,18 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public void SetMovementAllowed(bool allowed)
     {
         isMovementAllowed = allowed;
+    }
+
+    public void MeleeSpeed(bool active)
+    {
+        if (active)
+        {
+            moveSpeed *= 0.25f;
+        }
+        else
+        {
+            moveSpeed = originalSpeed;
+        }
+        
     }
 }
