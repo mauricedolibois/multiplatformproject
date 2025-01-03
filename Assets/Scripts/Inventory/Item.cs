@@ -36,6 +36,12 @@ public class Item : MonoBehaviour
         inventoryManager = GameObject.Find("UICanvas").GetComponent<InventoryManagement>();
     }
     
+    // Method to reset collected items
+    public static void ResetCollectedItems()
+    {
+        collectedItems.Clear();
+    }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

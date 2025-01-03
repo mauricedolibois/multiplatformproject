@@ -15,6 +15,7 @@ public class GameOverMenu : MonoBehaviour
     {
         Destroy(GameObject.FindGameObjectWithTag("inv"));
         Destroy(GameObject.FindGameObjectWithTag("SceneM"));
+        Item.ResetCollectedItems();
         SceneManager.LoadScene(0);
     }
 }

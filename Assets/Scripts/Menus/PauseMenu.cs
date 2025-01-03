@@ -45,5 +45,6 @@ public class PauseMenu :MonoBehaviour
         Destroy(GameObject.FindGameObjectWithTag("Player"));
         Destroy(GameObject.FindGameObjectWithTag("inv"));
         Destroy(GameObject.FindGameObjectWithTag("SceneM"));
+        Item.ResetCollectedItems();
     }
 }
