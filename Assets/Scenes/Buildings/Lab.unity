@@ -12191,8 +12191,8 @@ MonoBehaviour:
   itemName: Field test results
   quantity: 1
   sprite: {fileID: 21300000, guid: acdc3c1856e7d264a9b45cbdf4910da7, type: 3}
-  itemDescription: Subject fainted from the sound of the railway gun. Test failed.
-    Noise dampeners urgently required before we deafen our entire army.
+  itemDescription: '"Subject fainted from the sound of the railway gun. Test failed.
+    Noise dampeners urgently required before we deafen our entire army."'
   itemId: 6
 --- !u!61 &1430092680
 BoxCollider2D:

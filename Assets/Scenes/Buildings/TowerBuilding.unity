@@ -5608,9 +5608,9 @@ MonoBehaviour:
   itemName: Diary entry 2
   quantity: 1
   sprite: {fileID: 21300000, guid: acdc3c1856e7d264a9b45cbdf4910da7, type: 3}
-  itemDescription: "I swear, if I have to fix one more coffee machine, I\u2019m going
-    to lose it. Who knew being a scientist  meant spending half my day unclogging
-    pipes? I should\u2019ve just become a gardener."
+  itemDescription: "\"I swear, if I have to fix one more coffee machine, I\u2019m
+    going to lose it. Who knew being a scientist  meant spending half my day unclogging
+    pipes? I should\u2019ve just become a gardener.\""
   itemId: 7
 --- !u!61 &1694557057
 BoxCollider2D:
