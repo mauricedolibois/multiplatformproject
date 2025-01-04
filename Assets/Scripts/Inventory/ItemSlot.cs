@@ -93,16 +93,4 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         
     }
     
-     //CHEAT
-    private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                if (!inventoryManagement.FindItem("Key")) 
-                {
-                    inventoryManagement.AddItem("Key", 1, null, "A dirty key card left forgotten by some guard. Key to room X.");
-                }
-            }
-        }
-    
 }

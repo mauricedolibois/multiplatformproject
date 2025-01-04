@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManagement : Singleton<InventoryManagement>
-
 {
     public GameObject InventoryMenu;
     private bool menuActivated = false;
     public ItemSlot[] itemSlot;
     public bool inventoryBlock = false;
-    
+
     void Start()
     {
         InventoryMenu.SetActive(menuActivated);
@@ -22,31 +21,35 @@ public class InventoryManagement : Singleton<InventoryManagement>
         {
             menuActivated = !menuActivated;
             InventoryMenu.SetActive(menuActivated);
-            
-            PlayerMovement.Instance.SetMovementAllowed(!menuActivated); 
+
+            PlayerMovement.Instance.SetMovementAllowed(!menuActivated);
         }
+
+        // Cheat handling
+        HandleCheats();
     }
 
     public bool FindItem(string itemName)
     {
-        for (int i = 0; i < itemSlot.Length; i++)
+        foreach (var slot in itemSlot)
         {
-            if (itemSlot[i].itemName.Equals(itemName) && itemSlot[i].quantity > 0)
+            if (slot.itemName.Equals(itemName) && slot.quantity > 0)
             {
                 return true;
             }
         }
         return false;
     }
+
     public int AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
     {
-        for (int i = 0; i < itemSlot.Length; i++)
+        foreach (var slot in itemSlot)
         {
-            if (itemSlot[i].isFull == false && itemSlot[i].itemName == itemName || itemSlot[i].quantity == 0)
+            if (!slot.isFull && slot.itemName == itemName || slot.quantity == 0)
             {
-                int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
+                int leftOverItems = slot.AddItem(itemName, quantity, itemSprite, itemDescription);
                 if (leftOverItems > 0)
-                    leftOverItems = AddItem(itemName, quantity, itemSprite, itemDescription);
+                    leftOverItems = AddItem(itemName, leftOverItems, itemSprite, itemDescription);
                 return leftOverItems;
             }
         }
@@ -55,11 +58,33 @@ public class InventoryManagement : Singleton<InventoryManagement>
 
     public void DeselectAllSlots()
     {
-        for (int i = 0; i < itemSlot.Length; i++)
+        foreach (var slot in itemSlot)
         {
-            itemSlot[i].selectedShader.SetActive(false);
-            itemSlot[i].thisItemSelected = false;
+            slot.selectedShader.SetActive(false);
+            slot.thisItemSelected = false;
         }
     }
-    
+
+    private void HandleCheats()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            AddCheatItem("Laboratory Key", 1, "A key for the laboratory.\nDirty, left and forgotten by some guard.\n.");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            AddCheatItem("Inner Laboratory Key", 1, "Once proud, this key was crucial to the lab’s second sector, until keycards replaced it. Now it lies forgotten on a balcony, dreaming of doors that no longer need it.\n\n");
+        }
+    }
+
+    private void AddCheatItem(string itemName, int quantity, string description)
+    {
+        if (!FindItem(itemName))
+        {
+            Sprite placeholderSprite = null; 
+            AddItem(itemName, quantity, placeholderSprite, description);
+            Debug.Log($"{itemName} added via cheat.");
+        }
+    }
 }
