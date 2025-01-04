@@ -329,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8153677957264320352, guid: 2c00286d8519f06408224a8ba1a9f1ff, type: 3}
       propertyPath: m_Text
-      value: " <color=#303030>Prison Guard:</color> \n"
+      value: " <color=#303030>Outside Area:</color> \n"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
