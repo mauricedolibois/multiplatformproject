@@ -14,7 +14,7 @@ public class ShowControls : MonoBehaviour
     {
         controlsText.text = 
                             "Attack: L-Mouse\n" +
-                            "Stand-Up: Shift\n"+
+                            "Watch Out: Shift\n"+
                             "Inventory: I\n" +
                             "Pause: Q\n" ;
         areaText.text = "Outside Area";
@@ -28,7 +28,7 @@ public class ShowControls : MonoBehaviour
         {
             controlsText.text = 
                                 "Attack: L-Mouse\n" +
-                                "Stand-Up: Shift\n" +
+                                "Watch Out: Shift\n" +
                                 "Inventory: I\n" +
                                 "Pause: Q\n" ;
             areaText.text = "Outside Area";
