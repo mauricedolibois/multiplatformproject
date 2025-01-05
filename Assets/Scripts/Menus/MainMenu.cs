@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     public void Newgame()
     {
+        PlayerPrefs.DeleteKey("SideMissionComplete");
         SceneManager.LoadScene(1);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }

@@ -43,7 +43,6 @@ public class CameraController : MonoBehaviour
             if (Mathf.Abs(targetPosition.x - transform.position.x) > buffer.x ||
                 Mathf.Abs(targetPosition.y - transform.position.y) > buffer.y)
             {
-                //TODO: remove Camera stuttering
                 transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
             }
         }

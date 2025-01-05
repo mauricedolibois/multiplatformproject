@@ -60,13 +60,4 @@ public class Room : MonoBehaviour
             }
         }
     }
-
- 
-
-    [Serializable]
-    public class RoomData
-    {
-        public string roomName;
-        public int roomId;
-    }
 }

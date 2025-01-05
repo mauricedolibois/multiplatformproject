@@ -68,9 +68,13 @@ public class HandleSidemission : MonoBehaviour
     private void TriggerSideMission()
     {
         freePrisoners.SetActive(true);
-        sidemissionText.SetActive(true);
+        if (PlayerPrefs.GetInt("SideMissionComplete") != 1)
+        {
+            sidemissionText.SetActive(true);
+        }
         sidemissionCanvasGroup.alpha = 1f; 
         StartCoroutine(FadeOutGameObject());
+        PlayerPrefs.SetInt("SideMissionComplete", 1);
     }
 
     private IEnumerator FadeOutGameObject()
