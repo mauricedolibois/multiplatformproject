@@ -844,6 +844,7 @@ GameObject:
   - component: {fileID: 1006342084}
   - component: {fileID: 1006342083}
   - component: {fileID: 1006342082}
+  - component: {fileID: 1006342085}
   m_Layer: 5
   m_Name: NewGameButton
   m_TagString: Untagged
@@ -965,6 +966,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1006342080}
   m_CullTransparentMesh: 1
+--- !u!114 &1006342085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006342080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8925eed48bc864428a231cff34016b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonImage: {fileID: 0}
+  shineColor: {r: 1, g: 1, b: 0.5, a: 1}
 --- !u!1 &1249445668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,6 +1060,7 @@ GameObject:
   - component: {fileID: 1305647374}
   - component: {fileID: 1305647373}
   - component: {fileID: 1305647372}
+  - component: {fileID: 1305647375}
   m_Layer: 5
   m_Name: QuitGameButton
   m_TagString: Untagged
@@ -1166,6 +1182,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1305647370}
   m_CullTransparentMesh: 1
+--- !u!114 &1305647375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305647370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8925eed48bc864428a231cff34016b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonImage: {fileID: 0}
+  shineColor: {r: 0.94, g: 0.9, b: 0.55, a: 1}
 --- !u!1 &1420537000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,6 +1496,7 @@ GameObject:
   - component: {fileID: 1657888413}
   - component: {fileID: 1657888412}
   - component: {fileID: 1657888411}
+  - component: {fileID: 1657888414}
   m_Layer: 5
   m_Name: Connect to App
   m_TagString: Untagged
@@ -1575,6 +1606,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1657888409}
   m_CullTransparentMesh: 1
+--- !u!114 &1657888414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657888409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8925eed48bc864428a231cff34016b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonImage: {fileID: 0}
+  shineColor: {r: 0.94, g: 0.9, b: 0.55, a: 1}
 --- !u!1 &1739476526
 GameObject:
   m_ObjectHideFlags: 0
