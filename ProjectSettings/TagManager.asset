@@ -10,6 +10,7 @@ TagManager:
   - Security Camera
   - Area
   - SceneM
+  - Audio
   layers:
   - Default
   - TransparentFX

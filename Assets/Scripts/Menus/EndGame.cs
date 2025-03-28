@@ -21,6 +21,7 @@ public class EndGame : MonoBehaviour
         SceneManager.LoadScene(3);
         Destroy(GameObject.FindGameObjectWithTag("inv"));
         Destroy(GameObject.FindGameObjectWithTag("Player"));
+        Destroy(GameObject.FindGameObjectWithTag("Audio"));
         Time.timeScale = 1;
     }
 }
